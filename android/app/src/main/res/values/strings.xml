@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Letslokal</string>
+    <string name="facebook_app_id">456359226327853</string>
+    <string name="fb_login_protocol_scheme">fb456359226327853</string>
+    <string name="facebook_client_token">dfeb5fc1b6b5c3e442703844c855afbc</string>
+</resources>
