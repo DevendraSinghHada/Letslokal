@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:letslokal/Model/lokalQuest_Tips_Model.dart';
+import 'package:letslokal/Model/myQuests.dart';
 import 'package:letslokal/Model/signupmodel.dart';
 import 'package:letslokal/Model/updateProfile.dart';
 import 'package:letslokal/Model/wishListData.dart';
@@ -221,8 +222,7 @@ Future updateProfileData(String userId, String name, String displayName,
 
 //AddToWishlist api
 
-Future addTofav(
-    BuildContext context, String userId, int addToWishlist) async {
+Future addTofav(BuildContext context, String userId, int addToWishlist) async {
   try {
     final response = await http.post(
         Uri.parse(
@@ -247,8 +247,9 @@ Future addTofav(
       if (favStatus == 200) {
         Preference.pref.setString("userId", userId);
 
-        if(favMsg == "Success"){
-        snackbr(context, favMsg, kgreenclr);}
+        if (favMsg == "Success") {
+          snackbr(context, favMsg, kgreenclr);
+        }
       }
 
       print("Add to Wishlist Api called ");
@@ -282,7 +283,8 @@ Future wishListData(String userId) async {
 
 // remove from Wishlist Api
 
-Future removeWishlist(BuildContext context, String userId, String wishlistId) async {
+Future removeWishlist(
+    BuildContext context, String userId, String wishlistId) async {
   try {
     final response = await http.post(
         Uri.parse(
@@ -331,6 +333,33 @@ Future ranking(String userId, BuildContext context) async {
       } else if (msg != "Success") {
         return snackbr(context, msg.toString(), kredColor);
       }
+    }
+  } catch (e) {
+    print(e.toString());
+  }
+}
+
+Future myQuest(String userId) async {
+  try {
+    final respose = await http.post(
+        Uri.parse("https://www.letslokal.com/wp-json/wp/v2/rae/user/myQuest"),
+        body: {
+          "userId": userId,
+        });
+
+    var myQuestData = json.decode(respose.body);
+
+    var myQuestsMsg = myQuestData["msg"];
+    var myQuestsStatus = myQuestData["status"];
+
+    if (respose.statusCode == 200) {
+      MyQuests myQuests = myQuestsFromJson(respose.body.toString());
+
+      if (myQuestsStatus == 200) {
+        Preference.pref.setString("userId", userId);
+      }
+
+      return myQuests;
     }
   } catch (e) {
     print(e.toString());

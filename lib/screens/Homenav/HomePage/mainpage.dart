@@ -82,7 +82,8 @@ class _MainPageState extends State<MainPage> {
                               color: kWhiteColor,
                               fontWeight: FontWeight.bold,
                               fontSize: hm * 0.080,
-                              fontFamily: "BalooBhai2"),
+                              fontFamily: "BalooBhai2",
+                              height: 1.5),
                         ),
                       ),
                       FittedBox(
@@ -91,7 +92,8 @@ class _MainPageState extends State<MainPage> {
                           style: TextStyle(
                               fontSize: hm * 0.080,
                               fontWeight: FontWeight.bold,
-                              fontFamily: "balooBhai2"),
+                              fontFamily: "balooBhai2",
+                              height: 01.05),
                           gradientType: GradientType.radial,
                           colors: const [korangeClr, kyColor, kredColor],
                         ),
@@ -102,6 +104,7 @@ class _MainPageState extends State<MainPage> {
                         padding:
                             EdgeInsets.only(top: hm * 0.02, bottom: hm * 0.02),
                         child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
                             DefaultEButton(
                               width: wm * 0.27,

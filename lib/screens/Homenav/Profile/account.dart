@@ -77,7 +77,7 @@ class _AccountState extends State<Account> {
                                     textClr: kWhiteColor,
                                     color: kBlackColor.withOpacity(0.1)),
                                 DefaulatOBtn(
-                                    fontSize: 11,
+                                    fontSize: 12,
                                     text: "MyQuest",
                                     width: wm * 0.21,
                                     RadiusClr: kWhiteColor.withOpacity(0.1),

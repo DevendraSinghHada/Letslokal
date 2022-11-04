@@ -7,10 +7,9 @@ import 'package:letslokal/utils/preference.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// for testing github
+// bool for edit profile section
 
-// for displaying LOGIN
-// bool isUserExist = false;
+bool isFilled = false;
 
 bool isSelect = false;
 bool isOrder = false;

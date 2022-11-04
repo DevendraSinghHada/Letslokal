@@ -50,16 +50,22 @@ class SocialMediaField extends StatelessWidget {
       required this.focuscolor,
       required this.outbordercolor,
       required this.borderradius,
+      required this.controller,
+      required this.validator,
       Key? key})
       : super(key: key);
   final Color fillcolor;
   final Color focuscolor;
   final Color outbordercolor;
   final double borderradius;
+  final TextEditingController controller;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      validator: validator,
       style: const TextStyle(color: kWhiteColor),
       cursorColor: kWhiteColor,
       decoration: InputDecoration(

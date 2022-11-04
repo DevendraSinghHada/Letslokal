@@ -1,3 +1,4 @@
+import 'package:letslokal/components/components.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
@@ -15,6 +16,11 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
+  TextEditingController instaController = TextEditingController();
+  TextEditingController twitterController = TextEditingController();
+  TextEditingController fbController = TextEditingController();
+  TextEditingController tiktokController = TextEditingController();
+
   final _formkey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
@@ -150,10 +156,19 @@ class _EditProfileState extends State<EditProfile> {
                         child: Text('instagram', style: ffText),
                       ),
                       SocialMediaField(
+                        controller: instaController,
                         fillcolor: ktextfildecolor,
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
+                        validator: (p0) {
+                          if (instaController.text.contains("www") ||
+                              instaController.text.contains("http")) {
+                            return null;
+                          } else {
+                            return "Please enter a valid link";
+                          }
+                        },
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -161,10 +176,19 @@ class _EditProfileState extends State<EditProfile> {
                         child: Text('twitter', style: ffText),
                       ),
                       SocialMediaField(
+                        controller: twitterController,
                         fillcolor: ktextfildecolor,
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
+                        validator: (p0) {
+                          if (twitterController.text.contains("www") ||
+                              twitterController.text.contains("http")) {
+                            return null;
+                          } else {
+                            return "Please enter a valid link";
+                          }
+                        },
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -172,10 +196,19 @@ class _EditProfileState extends State<EditProfile> {
                         child: Text('facebook', style: ffText),
                       ),
                       SocialMediaField(
+                        controller: fbController,
                         fillcolor: ktextfildecolor,
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
+                        validator: (p0) {
+                          if (fbController.text.contains("www") ||
+                              fbController.text.contains("http")) {
+                            return null;
+                          } else {
+                            return "Please enter a valid link";
+                          }
+                        },
                       ),
                       Padding(
                         padding: EdgeInsets.only(
@@ -183,10 +216,19 @@ class _EditProfileState extends State<EditProfile> {
                         child: Text('tiktok', style: ffText),
                       ),
                       SocialMediaField(
+                        controller: tiktokController,
                         fillcolor: ktextfildecolor,
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
+                        validator: (p0) {
+                          if (tiktokController.text.contains("www") ||
+                              tiktokController.text.contains("http")) {
+                            return null;
+                          } else {
+                            return "Please enter a valid link";
+                          }
+                        },
                       ),
                       SizedBox(
                         height: hm * 0.01,
@@ -238,7 +280,11 @@ class _EditProfileState extends State<EditProfile> {
                           style: TextStyle(
                               fontSize: hm * 0.019, color: kWhiteColor),
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          if (_formkey.currentState!.validate()) {
+                            snackbr(context, "saved Successfully", kgreenclr);
+                          }
+                        },
                       ),
                     ),
                   ],

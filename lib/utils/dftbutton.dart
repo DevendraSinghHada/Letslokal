@@ -190,17 +190,20 @@ class DefaulatOBtn extends StatelessWidget {
       height: height,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          onSurface: color, side: BorderSide(color: RadiusClr, width: 1),
+          onSurface: color,
+          side: BorderSide(color: RadiusClr, width: 1),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius),
           ),
         ),
         onPressed: press,
         child: Center(
-          child: Text(
-            text!,
-            style: textW.copyWith(color: textClr, fontSize: fontSize),
-            textAlign: TextAlign.center,
+          child: FittedBox(
+            child: Text(
+              text!,
+              style: textW.copyWith(color: textClr, fontSize: fontSize),
+              textAlign: TextAlign.center,
+            ),
           ),
         ),
       ),
