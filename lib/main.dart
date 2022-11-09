@@ -12,6 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 bool isFilled = false;
 
 bool isSelect = false;
+
+// bool for order button used in account page
 bool isOrder = false;
 var isNewUser = Preference.pref.getBool("isNewUser") ?? true;
 // Boolians for Api

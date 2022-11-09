@@ -13,6 +13,12 @@ class Orders extends StatefulWidget {
 
 class _OrdersState extends State<Orders> {
   @override
+  void initState() {
+    isOrder;
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SizedBox(
         child: Column(
@@ -99,7 +105,7 @@ class _OrdersState extends State<Orders> {
                     isOrder = false;
                   });
                   // Navigator.canPop(context).pop(context);
-                  print("view$isOrder");
+                  print("view $isOrder");
                 },
                 color: kbttnColor,
                 child: Text(

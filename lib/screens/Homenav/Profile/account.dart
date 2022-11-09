@@ -28,8 +28,10 @@ class _AccountState extends State<Account> {
 
   @override
   void initState() {
-    setState(() {});
-    // TODO: implement initState
+    setState(() {
+      isOrder;
+    });
+
     super.initState();
   }
 
@@ -237,19 +239,19 @@ class _AccountState extends State<Account> {
                   radius: 8,
                   press: () {
                     isNewUser = true;
-                    String RemName, RemPass;
-                    bool CheckBoxClicked;
+                    String remName, remPass;
+                    bool checkBoxClicked;
 
-                    CheckBoxClicked =
+                    checkBoxClicked =
                         Preference.pref.getBool("CheckboxClicked") ?? false;
-                    RemName = Preference.pref.getString("RememberName") ?? "";
-                    RemPass = Preference.pref.getString("RememberPass") ?? "";
+                    remName = Preference.pref.getString("RememberName") ?? "";
+                    remPass = Preference.pref.getString("RememberPass") ?? "";
 
                     Preference.pref.clear();
 
-                    Preference.pref.setString("RememberedName", RemName);
-                    Preference.pref.setString("RememberedPass", RemPass);
-                    Preference.pref.setBool("ClickedCheckbox", CheckBoxClicked);
+                    Preference.pref.setString("RememberedName", remName);
+                    Preference.pref.setString("RememberedPass", remPass);
+                    Preference.pref.setBool("ClickedCheckbox", checkBoxClicked);
 
                     pushNdRemove(context, const LoginPage());
                     setState(() {});
@@ -284,6 +286,7 @@ class _AccountState extends State<Account> {
         });
   }
 
+// loginpop : used to show while user is a guest user then log in first to continue
   Container logInPopUp() {
     return Container(
       child: Center(
