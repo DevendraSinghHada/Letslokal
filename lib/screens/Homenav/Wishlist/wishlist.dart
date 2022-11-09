@@ -104,18 +104,16 @@ class _WishlistState extends State<Wishlist> {
                                             bottom: hm * 0.025,
                                             left: wm * 0.03,
                                           ),
-                                          child: Expanded(
-                                            child: Text(
-                                              data
-                                                  .elementAt(index)
-                                                  .productName
-                                                  .toString(),
-                                              style: dropdown.copyWith(
-                                                fontSize: 22,
-                                              ),
-                                              maxLines: 2,
-                                              overflow: TextOverflow.ellipsis,
+                                          child: Text(
+                                            data
+                                                .elementAt(index)
+                                                .productName
+                                                .toString(),
+                                            style: dropdown.copyWith(
+                                              fontSize: 22,
                                             ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         )
                                       ],
@@ -167,14 +165,11 @@ class _WishlistState extends State<Wishlist> {
                                             ))
                                       ],
                                     ),
-                                    SizedBox(
-                                      height: hm * 0.05,
-                                    )
                                   ],
                                 );
                               }))),
               SizedBox(
-                height: hm * 0.045,
+                height: hm * 0.095,
               ),
               Center(
                 child: SizedBox(

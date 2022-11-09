@@ -1,3 +1,4 @@
+import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/utils/constant/images.dart';
 import 'package:letslokal/utils/constant/screennavigation.dart';
@@ -17,6 +18,14 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  @override
+  void initState() {
+    super.initState();
+    setState(() {
+      isFilled;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,7 +101,11 @@ class _ProfileState extends State<Profile> {
                     children: [
                       Icon(
                         Icons.facebook_outlined,
-                        color: kWhiteColor,
+                        color:
+                            //  isFilled == true ?
+                            kWhiteColor,
+                        //  :
+                        //  kWhiteColor,
                         size: hm * 0.04,
                       ),
                       const Icon(

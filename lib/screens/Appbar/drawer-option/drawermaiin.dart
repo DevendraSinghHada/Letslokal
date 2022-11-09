@@ -1,11 +1,16 @@
+import 'package:letslokal/Services/auth.dart';
 import 'package:letslokal/components/components.dart';
+import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/drawer-option/about.dart';
+import 'package:letslokal/screens/Homenav/HomePage/ranking.dart';
 import 'package:letslokal/screens/Homenav/Profile/profile.dart';
 import 'package:letslokal/utils/constant/images.dart';
+import 'package:letslokal/utils/constant/screennavigation.dart';
+import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
 import 'package:letslokal/screens/Appbar/cart.dart';
-import 'package:letslokal/screens/Homenav/HomePage/globleranking.dart';
+
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/screens/Homenav/HomePage/how_to_joine.dart';
 import 'package:flutter/material.dart';
@@ -91,7 +96,31 @@ class _DrawermainState extends State<Drawermain> {
                               top: hm * 0.02, bottom: hm * 0.02),
                           child: ExpansionRow(
                               context, "Quests", HomeNav(selectindex: 4))),
-                      ExpansionRow(context, "Ranking", const GlobleRanking()),
+                      Row(
+                        children: [
+                          dotCircle(context),
+                          SizedBox(
+                            width: wm * 0.07,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              isNewUser
+                                  ? loginDialogue(context)
+                                  : ranking(Preference.pref.getString("userId"),
+                                          context)
+                                      .then(((value) {
+                                      value = myUrl;
+                                      pushTo(context, Ranking(url: myUrl));
+                                    }));
+                              //  Navigator.push(context, MaterialPageRoute(builder: (context) => HowtoJoine()));
+                            },
+                            child: Text(
+                              "Ranking",
+                              style: subtitatb.copyWith(fontSize: 18),
+                            ),
+                          ),
+                        ],
+                      ),
                       SizedBox(
                         height: hm * 0.02,
                       ),

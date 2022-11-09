@@ -17,35 +17,34 @@ class CongratulationPage extends StatefulWidget {
 class _CongratulationPageState extends State<CongratulationPage> {
   @override
   Widget build(BuildContext context) {
+    hm = MediaQuery.of(context).size.height;
+    wm = MediaQuery.of(context).size.height;
+
     return Scaffold(
       backgroundColor: kBlackColor,
       body: Padding(
         padding: EdgeInsets.only(left: wm * 0.035, right: wm * 0.035),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Container(
                   height: hm * 0.08,
-                  width: wm * 0.2,
+                  width: wm * 0.1,
                   decoration: const BoxDecoration(
                       image: DecorationImage(image: AssetImage(congrats))),
                 ),
-                // SizedBox(
-                //   width: 4,
-                // ),
                 Container(
                   height: hm * 0.08,
-                  width: wm * 0.2,
+                  width: wm * 0.1,
                   decoration: const BoxDecoration(
                       image: DecorationImage(image: AssetImage(congoface))),
                 ),
                 Container(
                   height: hm * 0.08,
-                  width: wm * 0.2,
+                  width: wm * 0.1,
                   decoration: const BoxDecoration(
                       image: DecorationImage(image: AssetImage(congrats))),
                 ),
@@ -53,9 +52,9 @@ class _CongratulationPageState extends State<CongratulationPage> {
             ),
             Padding(
               padding: EdgeInsets.only(top: hm * 0.01, bottom: hm * 0.01),
-              child: const Text(
+              child: Text(
                 "Congrats!!!",
-                style: congStyle,
+                style: congStyle.copyWith(fontFamily: "BalooBhai2"),
               ),
             ),
             Padding(
@@ -63,14 +62,15 @@ class _CongratulationPageState extends State<CongratulationPage> {
               child: Text(
                 "Your account has been successfully registered.",
                 style: textAcc,
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
-              height: hm * 0.070,
-              width: wm * 0.28,
+              height: hm * 0.075,
+              width: wm * 0.18,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    onSurface: kBlackColor,
+                    backgroundColor: ktransColor,
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                         side: const BorderSide(color: kcolorlogin, width: 2)),
@@ -80,11 +80,11 @@ class _CongratulationPageState extends State<CongratulationPage> {
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Text("Next",
-                          style: linktext.copyWith(
-                              fontWeight: FontWeight.bold, fontSize: 18)),
-                      const Icon(
+                    children: const [
+                      FittedBox(
+                        child: Text("Next", style: nextStyle),
+                      ),
+                      Icon(
                         Icons.arrow_forward_sharp,
                         size: 18,
                         color: kcolorlogin,

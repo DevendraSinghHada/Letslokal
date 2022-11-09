@@ -40,6 +40,7 @@ const kyColor = Colors.yellow;
 final kwhitedarkclr = Colors.white.withOpacity(0.8);
 const kgreenclr = Colors.green;
 const kthemeColor = Color(0xFF009688);
+const ktransColor = Colors.transparent;
 
 
 

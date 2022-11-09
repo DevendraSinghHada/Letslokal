@@ -1,17 +1,15 @@
-import 'package:letslokal/Model/myQuests.dart';
+import 'package:letslokal/Model/myQuestsModel.dart';
 import 'package:letslokal/Services/auth.dart';
+import 'package:letslokal/components/components.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
-import 'package:letslokal/screens/Homenav/Quests/quest.dart';
+import 'package:letslokal/screens/Homenav/MyQuest/selectedQuests.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/utils/constant/screennavigation.dart';
-import 'package:letslokal/utils/dftbutton.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
 
 import 'package:flutter/material.dart';
-
-import 'quest_outbreak/quest_outbreak.dart';
 
 class MyWishlist extends StatefulWidget {
   const MyWishlist({Key? key}) : super(key: key);
@@ -24,11 +22,21 @@ class _MyWishlistState extends State<MyWishlist> {
   final ScrollController _controller = ScrollController();
 
   MyQuests myQuests = MyQuests();
+  bool isDataLoading = true;
+  List<Data> data = [];
 
   @override
   void initState() {
-    myQuest(Preference.pref.getString("userId") ?? "")
-        .then((value) => myQuests = value);
+    myQuest(Preference.pref.getString("userId") ?? "").then((value) {
+      if (value != null) {
+        myQuests = value;
+        data.addAll(myQuests.data!.toList());
+      }
+
+      setState(() {
+        isDataLoading = false;
+      });
+    });
 
     // TODO: implement initState
     super.initState();
@@ -62,68 +70,82 @@ class _MyWishlistState extends State<MyWishlist> {
               SizedBox(
                 height: hm * 0.04,
               ),
-              GridView.builder(
-                  itemCount: 2,
-                  // itemCount: myQuests.data!.length
-                  //  lqdata.data!.length
+              isDataLoading
+                  ? circleloader
+                  : data.isEmpty
+                      ? Text(
+                          'You have not booked any quest, join a quest now and explore a city.',
+                          textAlign: TextAlign.center,
+                          style: textW.copyWith(
+                              color: kWhiteColor.withOpacity(0.8),
+                              fontSize: 20))
+                      : GridView.builder(
+                          itemCount: data.length,
+                          // itemCount: data!.length
+                          //  lqdata.data!.length
 
-                  shrinkWrap: true,
-                  controller: _controller,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      childAspectRatio: 0.65,
-                      crossAxisSpacing: 20,
-                      mainAxisSpacing: 5),
-                  itemBuilder: (BuildContext context, int index) {
-                    return GestureDetector(
-                        onTap: (() {}),
-                        child: Container(
-                            // height: hm * 0.75,
-                            width: wm * 0.44,
-                            decoration: BoxDecoration(
-                              color: ktextfildecolor,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: EdgeInsets.all(wm * 0.035),
-                                    child: Container(
-                                      height: wm * 0.4,
-                                      width: wm * 0.5,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          image: DecorationImage(
-                                              image: AssetImage(
-                                                  "assets/image-png/testimage.jpg"),
-                                              // NetworkImage(lqdata.data!
-                                              //     .elementAt(index)
-                                              //     .productImage!),
-                                              fit: BoxFit.cover)),
+                          shrinkWrap: true,
+                          controller: _controller,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 0.65,
+                                  crossAxisSpacing: 20,
+                                  mainAxisSpacing: 25),
+                          itemBuilder: (BuildContext context, int index) {
+                            return GestureDetector(
+                                onTap: (() {
+                                  pushTo(
+                                      context,
+                                      SelectedQuest(
+                                          url: data.elementAt(index).link!));
+                                }),
+                                child: Container(
+                                    // height: hm * 0.75,
+                                    width: wm * 0.44,
+                                    decoration: BoxDecoration(
+                                      color: ktextfildecolor,
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                  ),
-                                  Padding(
-                                    padding: EdgeInsets.only(
-                                      top: hm * 0.012,
-                                    ),
-                                    child: Text(
-                                      // lqdata.data!
-                                      //     .elementAt(index)
-                                      //     .productName!
-                                      " Quests Name",
-                                      overflow: TextOverflow.ellipsis,
-                                      maxLines: 2,
-                                      style: TextStyle(
-                                        color: kWhiteColor,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: hm * 0.020,
-                                      ),
-                                    ),
-                                  ),
-                                ])));
-                  }),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Padding(
+                                            padding: EdgeInsets.all(wm * 0.035),
+                                            child: Container(
+                                              height: wm * 0.4,
+                                              width: wm * 0.5,
+                                              decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.circular(10),
+                                                  image: DecorationImage(
+                                                      image: NetworkImage(data
+                                                          .elementAt(index)
+                                                          .productImage!),
+                                                      fit: BoxFit.cover)),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              top: hm * 0.012,
+                                            ),
+                                            child: Text(
+                                              data
+                                                  .elementAt(index)
+                                                  .productName!,
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 2,
+                                              style: TextStyle(
+                                                color: kWhiteColor,
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: hm * 0.020,
+                                              ),
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ),
+                                        ])));
+                          }),
               Padding(
                 padding: EdgeInsets.only(top: hm * 0.1, bottom: hm * 0.014),
                 child: Row(
@@ -169,9 +191,7 @@ class _MyWishlistState extends State<MyWishlist> {
                           style: textW.copyWith(
                               fontSize: 12, fontWeight: FontWeight.bold),
                         ),
-                        onPressed: () {
-                          pushTo(context, HomeNav(selectindex: 4));
-                        },
+                        onPressed: () {},
                       ),
                     )
 
@@ -246,6 +266,9 @@ class _MyWishlistState extends State<MyWishlist> {
                 "Quests expire 30 days after purchase",
                 style: pelletStyle.copyWith(fontSize: 20),
               ),
+              SizedBox(
+                height: hm * 0.04,
+              )
             ],
           ),
         ),

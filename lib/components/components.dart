@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:letslokal/screens/OnBoarding/login-screen.dart';
+import 'package:letslokal/utils/dftbutton.dart';
 
 import '../utils/constant/screennavigation.dart';
 import '../utils/styleguide/colors..dart';
@@ -20,14 +22,15 @@ Container checkCircle() {
       child: Padding(
         padding: const EdgeInsets.all(2),
         child: CircleAvatar(
-          backgroundColor: isSelect ? kblueColor : kWhiteColor,
+          // ignore: dead_code
+          backgroundColor: isSelect ? kblueColor : kbttnColor,
         ),
       ),
     ),
   );
 }
 
-// dot used in drawer mainn in expansion tile
+// dot used in drawer main in expansion tile
 Container dotCircle(BuildContext context) {
   return Container(
     height: hm * 0.003,
@@ -91,3 +94,63 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackbr(
 const circleloader = Center(
   child: CircularProgressIndicator.adaptive(),
 );
+
+// log in pop
+
+loginDialogue(BuildContext context) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12),
+          ),
+          contentPadding: EdgeInsets.all(wm * 0.04),
+          backgroundColor: kWhiteColor,
+          title: Center(
+              child: Text(
+            "Log in first to continue",
+            style: reasonStyle,
+          )),
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: wm * 0.05, right: wm * 0.05),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  DefaultEButton(
+                    width: wm * 0.18,
+
+                    height: hm * 0.05,
+                    //  hm * 0.05,
+                    radius: 8,
+                    press: () {
+                      pushTo(context, const LoginPage());
+                    },
+                    color: kcolorlogin,
+                    child: FittedBox(
+                      child: Text(
+                        "Log In ",
+                        style: textW,
+                      ),
+                    ),
+                  ),
+                  DefaulatOBtn(
+                      width: wm * 0.18,
+                      fontSize: 14,
+                      RadiusClr: kcolorlogin,
+                      height: hm * 0.05,
+                      text: "Later",
+                      radius: 8,
+                      press: () {
+                        Navigator.pop(context);
+                      },
+                      textClr: kcolorlogin,
+                      color: ktextfildecolor)
+                ],
+              ),
+            ),
+          ],
+        );
+      });
+}

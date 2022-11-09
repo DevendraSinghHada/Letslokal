@@ -62,12 +62,19 @@ class _LoginPageState extends State<LoginPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      InkWell(
-                          onTap: () {
+                      TextButton(
+                          onPressed: () {
                             isNewUser == true;
                             replaceRoute(context, HomeNav(selectindex: 1));
                           },
-                          child: Text('Skip', style: title)),
+                          child: Text('Skip', style: title))
+
+                      // InkWell(
+                      //     onTap: () {
+                      //       isNewUser == true;
+                      //       replaceRoute(context, HomeNav(selectindex: 1));
+                      //     },
+                      //     child: Text('Skip', style: title)),
                     ],
                   ),
                 ),
@@ -281,38 +288,56 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(
-                      left: wm * 0.05,
-                      right: wm * 0.05,
-                      top: hm * 0.015,
+                      // left: wm * 0.05,
+                      // right: wm * 0.05,
+                      // top: hm * 0.015,
                       bottom: hm * 0.03),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                          onTap: () {
+                      TextButton(
+                          onPressed: () {
                             pushTo(context, const Register());
                           },
                           child: Text(
-                            'Register | ',
+                            "Register |",
                             style: textW,
                           )),
-                      InkWell(
-                          onTap: () {
+                      // GestureDetector(
+                      //     onTap: () {
+                      //       pushTo(context, const Register());
+                      //     },
+                      //     child: Text(
+                      //       'Register | ',
+                      //       style: textW,
+                      //     )),
+                      TextButton(
+                          autofocus: true,
+                          onPressed: () {
                             pushTo(context, const ForgotPassword());
                           },
                           child: Text(
-                            'Lost your Password?',
+                            "Lost your Password?",
                             style: textW,
                           )),
+                      // InkWell(
+                      //     onTap: () {
+                      //       pushTo(context, const ForgotPassword());
+                      //     },
+                      //     child: Text(
+                      //       'Lost your Password?',
+                      //       style: textW,
+                      //     )),
                     ],
                   ),
                 ),
                 Center(
-                  child: Text('Privacy Policy.',
-                      style: textW.copyWith(
-                        color: kblueColor,
-                      )),
-                )
+                    child: TextButton(
+                        child: Text('Privacy Policy.',
+                            style: textW.copyWith(
+                              color: kblueColor,
+                            )),
+                        onPressed: () {}))
               ],
             ),
           ),

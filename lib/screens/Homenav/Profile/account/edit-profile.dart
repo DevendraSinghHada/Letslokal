@@ -1,11 +1,14 @@
 import 'package:letslokal/components/components.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
+import 'package:letslokal/screens/Homenav/homenav.dart';
+import 'package:letslokal/utils/constant/screennavigation.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/dfttextformfield.dart';
 
 import 'package:flutter/material.dart';
 
+import '../../../../main.dart';
 import '../../../../utils/styleguide/textstyle.dart';
 
 class EditProfile extends StatefulWidget {
@@ -161,11 +164,11 @@ class _EditProfileState extends State<EditProfile> {
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
-                        validator: (p0) {
+                        validator: (value) {
                           if (instaController.text.contains("www") ||
                               instaController.text.contains("http")) {
                             return null;
-                          } else {
+                          } else if (instaController.text.isNotEmpty) {
                             return "Please enter a valid link";
                           }
                         },
@@ -185,7 +188,7 @@ class _EditProfileState extends State<EditProfile> {
                           if (twitterController.text.contains("www") ||
                               twitterController.text.contains("http")) {
                             return null;
-                          } else {
+                          } else if (twitterController.text.isNotEmpty) {
                             return "Please enter a valid link";
                           }
                         },
@@ -201,11 +204,11 @@ class _EditProfileState extends State<EditProfile> {
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
-                        validator: (p0) {
+                        validator: (value) {
                           if (fbController.text.contains("www") ||
                               fbController.text.contains("http")) {
                             return null;
-                          } else {
+                          } else if (fbController.text.isNotEmpty) {
                             return "Please enter a valid link";
                           }
                         },
@@ -221,11 +224,11 @@ class _EditProfileState extends State<EditProfile> {
                         focuscolor: ktextfildecolor,
                         outbordercolor: ktextfildecolor,
                         borderradius: hm * 0.010,
-                        validator: (p0) {
+                        validator: (value) {
                           if (tiktokController.text.contains("www") ||
                               tiktokController.text.contains("http")) {
                             return null;
-                          } else {
+                          } else if (tiktokController.text.isNotEmpty) {
                             return "Please enter a valid link";
                           }
                         },
@@ -252,15 +255,19 @@ class _EditProfileState extends State<EditProfile> {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        child: Text(
-                          "Change password",
-                          style: TextStyle(
-                            fontSize: hm * 0.019,
-                            color: kWhiteColor,
+                        child: FittedBox(
+                          child: Text(
+                            "Change password",
+                            style: TextStyle(
+                              fontSize: hm * 0.019,
+                              color: kWhiteColor,
+                            ),
+                            textAlign: TextAlign.center,
                           ),
-                          textAlign: TextAlign.center,
                         ),
-                        onPressed: () {},
+                        onPressed: () {
+                          pushTo(context, HomeNav(selectindex: 5));
+                        },
                       ),
                     ),
                     SizedBox(
@@ -275,14 +282,20 @@ class _EditProfileState extends State<EditProfile> {
                             borderRadius: BorderRadius.circular(30),
                           ),
                         ),
-                        child: Text(
-                          "Save Changes",
-                          style: TextStyle(
-                              fontSize: hm * 0.019, color: kWhiteColor),
+                        child: FittedBox(
+                          child: Text(
+                            "Save Changes",
+                            style: TextStyle(
+                                fontSize: hm * 0.019, color: kWhiteColor),
+                          ),
                         ),
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
-                            snackbr(context, "saved Successfully", kgreenclr);
+                            // snackbr(context, "success", kgreenclr);
+
+                            setState(() {
+                              isFilled = true;
+                            });
                           }
                         },
                       ),

@@ -59,15 +59,13 @@ class _RegisterState extends State<Register> {
                 Padding(
                   padding: EdgeInsets.only(top: hm * 0.04, bottom: hm * 0.04),
                   child: Align(
-                    alignment: Alignment.topRight,
-                    child: InkWell(
-                      onTap: () {
-                        isNewUser == true;
-                        replaceRoute(context, HomeNav(selectindex: 1));
-                      },
-                      child: Text('Skip', style: title),
-                    ),
-                  ),
+                      alignment: Alignment.topRight,
+                      child: TextButton(
+                          onPressed: () {
+                            isNewUser == true;
+                            replaceRoute(context, HomeNav(selectindex: 1));
+                          },
+                          child: Text('Skip', style: title))),
                 ),
                 Image.asset(logoLetsLokal, height: hm * 0.1, width: wm * 0.4),
                 Padding(
@@ -339,20 +337,19 @@ class _RegisterState extends State<Register> {
                 Align(
                   alignment: Alignment.centerLeft,
                   child: Padding(
-                    padding: EdgeInsets.only(
-                        left: wm * 0.05,
-                        right: wm * 0.05,
-                        top: hm * 0.015,
-                        bottom: hm * 0.015),
-                    child: InkWell(
-                        onTap: () {
-                          pushTo(context, const LoginPage());
-                        },
-                        child: Text(
-                          'Log in ',
-                          style: textW,
-                        )),
-                  ),
+                      padding: EdgeInsets.only(
+                          // left: wm * 0.05,
+                          // right: wm * 0.05,
+                          // top: hm * 0.015,
+                          bottom: hm * 0.015),
+                      child: TextButton(
+                          onPressed: () {
+                            pushTo(context, const LoginPage());
+                          },
+                          child: Text(
+                            "Log in ",
+                            style: textW,
+                          ))),
                 ),
                 Text('Privacy Policy.',
                     style: textW.copyWith(

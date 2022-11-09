@@ -55,9 +55,14 @@ const TextStyle expTileStyle =
 const TextStyle bttmStyle =
     TextStyle(color: _textColor, fontWeight: FontWeight.w700, fontSize: 12);
 
-// Congrats button textStyle
+// Congrats Text textStyle
 const TextStyle congStyle =
     TextStyle(color: kWhiteColor, fontSize: 50, fontWeight: FontWeight.normal);
+
+// Congrats page Next text Style
+//
+const TextStyle nextStyle =
+    TextStyle(color: kcolorlogin, fontSize: 18, fontWeight: FontWeight.bold);
 
 TextStyle titalb = TextStyle(
     color: kWhiteColor, fontWeight: FontWeight.bold, fontSize: hm * 0.060);
@@ -73,7 +78,6 @@ TextStyle smalltital =
     TextStyle(color: kWhiteColor.withOpacity(0.90), fontSize: hm * 0.019);
 TextStyle subsmalltital =
     TextStyle(color: kWhiteColor.withOpacity(0.90), fontSize: hm * 0.018);
-TextStyle linktext = TextStyle(
-  color: kcolorlogin,
-  fontSize: hm * 0.018,
-);
+TextStyle linktext = const TextStyle(color: kcolorlogin, fontSize: 24
+    //  hm * 0.018,
+    );

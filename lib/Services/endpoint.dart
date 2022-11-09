@@ -1,0 +1,10 @@
+const String baseUrl = 'https://www.letslokal.com/wp-json/wp/v2/rae/user/';
+const String uSignUpApi = 'signup';
+const String uLoginApi = 'login';
+const String uHomePageApi = 'getProducts';
+const String uUpdateProfApi = 'updateProfile';
+const String uAddtoWish = 'addTowishList';
+const String uWishlistApi = 'wishList';
+const String uRemoveWishApi = 'removeWishList';
+const String uRankingApi = 'ranking';
+const String uMyQuestApi = "myQuest";

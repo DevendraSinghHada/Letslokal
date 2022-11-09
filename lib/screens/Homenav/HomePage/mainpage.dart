@@ -1,5 +1,6 @@
 import 'package:letslokal/Model/lokalQuest_Tips_Model.dart';
 import 'package:letslokal/Services/auth.dart';
+import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/screens/Homenav/HomePage/ranking.dart';
 import 'package:letslokal/screens/Homenav/HomePage/webview_tips.dart';
@@ -23,15 +24,16 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  //bool for expanding tips on view more button in the end of the screen
+  bool isTipsExpand = false;
+
+  // bool for Showing Loader
+  bool isloading = true;
+
   final ScrollController _controller = ScrollController();
 
-  bool isFav = true;
-
-  var favTitle;
-  var favImage;
-
   LQdata lqdata = LQdata();
-  bool isloading = true;
+
   @override
   void initState() {
     fetchLQdata(Preference.pref.getString("ID") ?? "").then((value) {
@@ -44,14 +46,6 @@ class _MainPageState extends State<MainPage> {
     // TODO: implement initState
     super.initState();
   }
-
-  // isLiked() {
-  //   setState(() {
-  //     isFav = !isFav;
-  //     favImage;
-  //     favTitle;
-  //   });
-  // }
 
   @override
   Widget build(BuildContext context) {
@@ -129,12 +123,16 @@ class _MainPageState extends State<MainPage> {
                                 press: () {
                                   print("Button Pushed");
 
-                                  ranking(Preference.pref.getString("userId"),
-                                          context)
-                                      .then(((value) {
-                                    value = myUrl;
-                                    pushTo(context, Ranking(url: myUrl));
-                                  }));
+                                  isNewUser
+                                      ? loginDialogue(context)
+                                      : ranking(
+                                              Preference.pref
+                                                  .getString("userId"),
+                                              context)
+                                          .then(((value) {
+                                          value = myUrl;
+                                          pushTo(context, Ranking(url: myUrl));
+                                        }));
 
                                   // pushTo(context, const GlobleRanking());
                                 },
@@ -173,7 +171,9 @@ class _MainPageState extends State<MainPage> {
                         ),
                       ),
                       GridView.builder(
-                          itemCount: lqdata.data!.length,
+                          itemCount: lqdata.data!.length <= 4
+                              ? lqdata.data!.length
+                              : 4,
                           shrinkWrap: true,
                           controller: _controller,
                           gridDelegate:
@@ -269,8 +269,12 @@ class _MainPageState extends State<MainPage> {
                                                   fontSize: hm * 0.018,
                                                 ),
                                               ),
-                                              InkWell(
-                                                onTap: () {
+                                              IconButton(
+                                                constraints:
+                                                    const BoxConstraints(
+                                                        maxHeight: 20),
+                                                splashRadius: 25,
+                                                onPressed: () {
                                                   print(
                                                       " this tapped ${lqdata.data!.elementAt(index).productId!} ");
 
@@ -283,60 +287,44 @@ class _MainPageState extends State<MainPage> {
 
                                                   // if(lqdata.data!.elementAt(index).isWishlist == 0){
 
-                                                  addTofav(
-                                                          context,
-                                                          Preference.pref
-                                                              .getString(
-                                                                  "userId"),
-                                                          Preference.pref.getInt(
-                                                              "add_to_wishlist"))
-                                                      .then(
-                                                    (value) {
-                                                      if (lqdata.data!
-                                                              .elementAt(index)
-                                                              .isWishlist ==
-                                                          1) {
-                                                        return setState(() {
-                                                          lqdata.data!
-                                                              .elementAt(index)
-                                                              .isWishlist = 0;
-                                                        });
-                                                      } else {
-                                                        return setState(() {
-                                                          lqdata.data!
-                                                              .elementAt(index)
-                                                              .isWishlist = 1;
-                                                        });
-                                                      }
-                                                    },
-                                                  );
+                                                  isNewUser
+                                                      ? loginDialogue(context)
+                                                      : addTofav(
+                                                              context,
+                                                              Preference.pref
+                                                                  .getString(
+                                                                      "userId"),
+                                                              Preference.pref
+                                                                  .getInt(
+                                                                      "add_to_wishlist"))
+                                                          .then(
+                                                          (value) {
+                                                            if (lqdata.data!
+                                                                    .elementAt(
+                                                                        index)
+                                                                    .isWishlist ==
+                                                                1) {
+                                                              return setState(
+                                                                  () {
+                                                                lqdata.data!
+                                                                    .elementAt(
+                                                                        index)
+                                                                    .isWishlist = 0;
+                                                              });
+                                                            } else {
+                                                              return setState(
+                                                                  () {
+                                                                lqdata.data!
+                                                                    .elementAt(
+                                                                        index)
+                                                                    .isWishlist = 1;
+                                                              });
+                                                            }
+                                                          },
+                                                        );
                                                   setState(() {});
-
-                                                  // setState(() {
-                                                  //   lqdata.data!
-                                                  //           .elementAt(index)
-                                                  //           .isSelected =
-                                                  //       !lqdata.data!
-                                                  //           .elementAt(index)
-                                                  //           .isSelected;
-                                                  // });
-                                                  // }
-                                                  // else {
-                                                  //    removeWishlist(context,Preference.pref
-                                                  //         .getString(
-                                                  //             "userId"),
-                                                  //     lqdata.data!.elementAt(index).productId.toString());
-
-                                                  //     setState(() {
-                                                  //        lqdata.data!.elementAt(index).isSelected =false;
-                                                  //     });
-
-                                                  // }
-                                                  // setState(() {
-
-                                                  // });
                                                 },
-                                                child: Icon(
+                                                icon: Icon(
                                                   lqdata.data!
                                                               .elementAt(index)
                                                               .isWishlist ==
@@ -370,7 +358,7 @@ class _MainPageState extends State<MainPage> {
                             height: hm * 0.055,
                             radius: 12,
                             press: () {
-                              setState(() {});
+                              pushTo(context, HomeNav(selectindex: 4));
                             },
                             color: ktextfildecolor,
                             child: Center(
@@ -390,6 +378,8 @@ class _MainPageState extends State<MainPage> {
                   ),
                   child: Container(
                     color: kWhiteColor,
+                    // constraints: BoxConstraints(
+                    //     maxHeight: isTipsExpand ? hm * 0.7 : hm * 0.5),
                     width: double.infinity,
                     child: Padding(
                       padding: EdgeInsets.only(
@@ -406,7 +396,8 @@ class _MainPageState extends State<MainPage> {
                             child: Container(
                               color: kWhiteColor,
                               child: GridView.builder(
-                                  itemCount: 4,
+                                  itemCount:
+                                      isTipsExpand ? lqdata.post!.length : 2,
                                   shrinkWrap: true,
                                   controller: _controller,
                                   gridDelegate:
@@ -499,9 +490,17 @@ class _MainPageState extends State<MainPage> {
                                 fontSize: 14,
                                 RadiusClr: kBlackColor,
                                 height: hm * 0.055,
-                                text: "View all",
+                                text: isTipsExpand ? "View less" : "View more",
                                 radius: 12,
-                                press: () {},
+                                press: () {
+                                  isTipsExpand
+                                      ? setState(() {
+                                          isTipsExpand = false;
+                                        })
+                                      : setState(() {
+                                          isTipsExpand = true;
+                                        });
+                                },
                                 textClr: kBlackColor,
                                 color: kWhiteColor),
                           ),

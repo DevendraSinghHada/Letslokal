@@ -320,51 +320,5 @@ class _AccountState extends State<Account> {
         ]),
       )),
     );
-    // showDialog(
-    //     context: context,
-    //     builder: (BuildContext context) {
-    //       return SimpleDialog(
-    //         contentPadding: EdgeInsets.zero,
-    //         backgroundColor: ktextfildecolor,
-    //         title: Text("Log in first to continue"),
-    //         children: [
-    //           Padding(
-    //             padding: const EdgeInsets.only(left: 8.0, right: 8),
-    //             child: Row(
-    //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-    //               children: [
-    //                 DefaultEButton(
-    //                   width: 80,
-    //                   //  wm * 0.2,
-    //                   height: 40,
-    //                   //  hm * 0.05,
-    //                   radius: 8,
-    //                   press: () {
-    //                     pushTo(context, LoginPage());
-    //                   },
-    //                   color: kcolorlogin,
-    //                   child: Text(
-    //                     "Log In ",
-    //                     style: textW,
-    //                   ),
-    //                 ),
-    //                 DefaulatOBtn(
-    //                     width: 80,
-    //                     // wm * 0.2,
-    //                     fontSize: 14,
-    //                     RadiusClr: kcolorlogin,
-    //                     height: 40,
-    //                     //  hm * 0.05,
-    //                     text: "No",
-    //                     radius: 8,
-    //                     press: () {},
-    //                     textClr: kcolorlogin,
-    //                     color: ktextfildecolor)
-    //               ],
-    //             ),
-    //           ),
-    //         ],
-    //       );
-    //     });
   }
 }

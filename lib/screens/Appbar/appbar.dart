@@ -43,7 +43,12 @@ AppBar myAppBar(BuildContext context, bool isBack) {
                 padding: const EdgeInsets.only(left: 4.0, right: 4),
                 child: isNewUser
                     ? TextButton(
-                        child: Text("LOGIN", style: textW),
+                        child: Center(
+                            child: Text(
+                          "LOGIN",
+                          style: textW,
+                          textAlign: TextAlign.center,
+                        )),
                         onPressed: () {
                           pushTo(context, const LoginPage());
                         },

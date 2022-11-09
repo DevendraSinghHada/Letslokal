@@ -3,10 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:letslokal/Model/lokalQuest_Tips_Model.dart';
-import 'package:letslokal/Model/myQuests.dart';
+import 'package:letslokal/Model/myQuestsModel.dart';
 import 'package:letslokal/Model/signupmodel.dart';
 import 'package:letslokal/Model/updateProfile.dart';
 import 'package:letslokal/Model/wishListData.dart';
+import 'package:letslokal/Services/endpoint.dart';
 import 'package:letslokal/components/components.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
@@ -51,14 +52,12 @@ var updateMsg;
 Future fetchsignUpData(BuildContext context, String name, String username,
     String password, String email) async {
   try {
-    final response = await http.post(
-        Uri.parse("https://www.letslokal.com/wp-json/wp/v2/rae/user/signup"),
-        body: {
-          "name": name,
-          "username": username,
-          "password": password,
-          "email": email
-        });
+    final response = await http.post(Uri.parse(baseUrl + uSignUpApi), body: {
+      "name": name,
+      "username": username,
+      "password": password,
+      "email": email
+    });
     var apiSdata = json.decode(response.body);
     apiRegstatus = apiSdata["status"];
     apiSmsg = apiSdata["msg"];
@@ -100,12 +99,10 @@ Future fetchLoginData(
   String password,
 ) async {
   try {
-    final response = await http.post(
-        Uri.parse('https://www.letslokal.com/wp-json/wp/v2/rae/user/login'),
-        body: {
-          "username": username,
-          "password": password,
-        });
+    final response = await http.post(Uri.parse(baseUrl + uLoginApi), body: {
+      "username": username,
+      "password": password,
+    });
     apiLdata = json.decode(response.body);
     apiLmsg = apiLdata["msg"];
     apiLstatus = apiLdata["status"];
@@ -148,10 +145,8 @@ Future fetchLoginData(
 
 Future fetchLQdata(String userId) async {
   try {
-    final response = await http.post(
-        Uri.parse(
-            "https://www.letslokal.com/wp-json/wp/v2/rae/user/getProducts"),
-        body: {"userId": userId});
+    final response = await http
+        .post(Uri.parse(baseUrl + uHomePageApi), body: {"userId": userId});
 
     lokalquestdata = json.decode(response.body);
     var lqStatus = lokalquestdata["status"];
@@ -183,16 +178,13 @@ Future fetchLQdata(String userId) async {
 Future updateProfileData(String userId, String name, String displayName,
     String oldPassword, String newPassword) async {
   try {
-    final res = await http.post(
-        Uri.parse(
-            "https://www.letslokal.com/wp-json/wp/v2/rae/user/updateProfile"),
-        body: {
-          "userId": userId,
-          "name": displayName,
-          "display_name": name,
-          "old_password": oldPassword,
-          "new_password": newPassword
-        });
+    final res = await http.post(Uri.parse(baseUrl + uUpdateProfApi), body: {
+      "userId": userId,
+      "name": displayName,
+      "display_name": name,
+      "old_password": oldPassword,
+      "new_password": newPassword
+    });
     var UpdatedData = json.decode(res.body);
 
     var msg = UpdatedData["msg"];
@@ -224,9 +216,7 @@ Future updateProfileData(String userId, String name, String displayName,
 
 Future addTofav(BuildContext context, String userId, int addToWishlist) async {
   try {
-    final response = await http.post(
-        Uri.parse(
-            "https://www.letslokal.com/wp-json/wp/v2/rae/user/addTowishList"),
+    final response = await http.post(Uri.parse(baseUrl + uAddtoWish),
         headers: {
           "content-type": "application/json",
         },
@@ -261,9 +251,8 @@ Future addTofav(BuildContext context, String userId, int addToWishlist) async {
 
 Future wishListData(String userId) async {
   try {
-    final response = await http.post(
-        Uri.parse("https://www.letslokal.com/wp-json/wp/v2/rae/user/wishList"),
-        body: {"userId": userId});
+    final response = await http
+        .post(Uri.parse(baseUrl + uWishlistApi), body: {"userId": userId});
 
     var data = json.decode(response.body);
     WishMsg = data["msg"];
@@ -286,9 +275,7 @@ Future wishListData(String userId) async {
 Future removeWishlist(
     BuildContext context, String userId, String wishlistId) async {
   try {
-    final response = await http.post(
-        Uri.parse(
-            "https://www.letslokal.com/wp-json/wp/v2/rae/user/removeWishList"),
+    final response = await http.post(Uri.parse(baseUrl + uRemoveWishApi),
         body: {"userId": userId, "wishlistId": wishlistId});
 
     var data = json.decode(response.body);
@@ -318,9 +305,8 @@ Future removeWishlist(
 
 Future ranking(String userId, BuildContext context) async {
   try {
-    final response = await http.post(
-        Uri.parse("https://www.letslokal.com/wp-json/wp/v2/rae/user/ranking"),
-        body: {"userId": userId});
+    final response = await http
+        .post(Uri.parse(baseUrl + uRankingApi), body: {"userId": userId});
 
     var data = json.decode(response.body);
     myUrl = data["pageLink"];
@@ -341,11 +327,9 @@ Future ranking(String userId, BuildContext context) async {
 
 Future myQuest(String userId) async {
   try {
-    final respose = await http.post(
-        Uri.parse("https://www.letslokal.com/wp-json/wp/v2/rae/user/myQuest"),
-        body: {
-          "userId": userId,
-        });
+    final respose = await http.post(Uri.parse(baseUrl + uMyQuestApi), body: {
+      "userId": userId,
+    });
 
     var myQuestData = json.decode(respose.body);
 

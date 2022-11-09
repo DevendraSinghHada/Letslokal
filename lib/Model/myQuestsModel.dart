@@ -6,8 +6,6 @@ import 'package:flutter/material.dart';
 
 import 'dart:convert';
 
-import 'package:letslokal/Model/updateProfile.dart';
-
 MyQuests myQuestsFromJson(String str) => MyQuests.fromJson(json.decode(str));
 
 String myQuestsToJson(MyQuests data) => json.encode(data.toJson());
@@ -21,20 +19,18 @@ class MyQuests {
 
   int? status;
   String? msg;
-  Map<String, Data>? data;
+  List<Data>? data;
 
   factory MyQuests.fromJson(Map<String, dynamic> json) => MyQuests(
         status: json["status"],
         msg: json["msg"],
-        data: Map.from(json["data"])
-            .map((k, v) => MapEntry<String, Data>(k, Data.fromJson(v))),
+        data: List<Data>.from(json["data"].map((x) => Data.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "msg": msg,
-        "data": Map.from(data!)
-            .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
       };
 }
 
