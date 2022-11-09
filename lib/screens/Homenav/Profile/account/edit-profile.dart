@@ -291,7 +291,7 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
-                            // snackbr(context, "success", kgreenclr);
+                            snackbr(context, "success", kgreenclr);
 
                             setState(() {
                               isFilled = true;
