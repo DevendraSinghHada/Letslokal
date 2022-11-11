@@ -1,4 +1,5 @@
-import 'package:letslokal/Model/lokalQuest_Tips_Model.dart';
+
+import 'package:letslokal/Model/LokalQuestTipsModel.dart';
 import 'package:letslokal/Services/auth.dart';
 import 'package:letslokal/components/components.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';

@@ -2,7 +2,8 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:letslokal/Model/lokalQuest_Tips_Model.dart';
+import 'package:letslokal/Model/LokalQuestTipsModel.dart';
+
 import 'package:letslokal/Model/myQuestsModel.dart';
 import 'package:letslokal/Model/signupmodel.dart';
 import 'package:letslokal/Model/updateProfile.dart';
