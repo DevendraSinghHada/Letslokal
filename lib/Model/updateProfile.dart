@@ -50,7 +50,7 @@ class User {
   String? capKey;
   List<String>? roles;
   Allcaps? allcaps;
-  dynamic? filter;
+  dynamic filter;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
         data: Data.fromJson(json["data"]),
@@ -146,7 +146,7 @@ class Data {
   String? userActivationKey;
   String? userStatus;
   String? displayName;
-  dynamic? alpha;
+  dynamic alpha;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["ID"],

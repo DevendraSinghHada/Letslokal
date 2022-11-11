@@ -9,6 +9,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'HomePage/mainpage.dart';
 import 'MyQuest/myquestfinal.dart';
 
+// ignore: must_be_immutable
 class HomeNav extends StatefulWidget {
   int selectindex;
   HomeNav({super.key, required this.selectindex});
@@ -74,7 +75,7 @@ class _HomeNavState extends State<HomeNav> {
               icon: _selectindex == 2
                   ? SvgPicture.asset(logo, height: 23)
                   : Image.asset(
-                      WhiteLogo,
+                      whiteLogo,
                       height: 26,
                     ),
               label: '',

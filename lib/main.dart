@@ -2,7 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:letslokal/Provider/app_state.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
-import 'package:letslokal/screens/OnBoarding/congratulationPage.dart';
 import 'package:letslokal/screens/OnBoarding/login-screen.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:provider/provider.dart';

@@ -7,25 +7,25 @@ import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
 import 'package:flutter/material.dart';
 
-class delete extends StatefulWidget {
-  const delete({super.key});
+class Delete extends StatefulWidget {
+  const Delete({super.key});
 
   @override
-  State<delete> createState() => _deleteState();
+  State<Delete> createState() => _DeleteState();
 }
 
-class _deleteState extends State<delete> {
-  TextEditingController deleteNameController =
+class _DeleteState extends State<Delete> {
+  TextEditingController deletenameController =
       TextEditingController(text: Preference.pref.getString("name"));
   TextEditingController deleteEmailController =
       TextEditingController(text: Preference.pref.getString("email"));
-  List<deleteModel> deleteList = [
-    deleteModel("-Select Reason-", false),
-    deleteModel("I need a break,I'll be back", false),
-    deleteModel("I want to create a new account", false),
-    deleteModel("I have more than one account", false),
-    deleteModel("I don't like the concept", true),
-    deleteModel("I don't need it", true)
+  List<DeleteModel> deleteList = [
+    DeleteModel("-Select Reason-", false),
+    DeleteModel("I need a break,I'll be back", false),
+    DeleteModel("I want to create a new account", false),
+    DeleteModel("I have more than one account", false),
+    DeleteModel("I don't like the concept", true),
+    DeleteModel("I don't need it", true)
   ];
   @override
   Widget build(BuildContext context) {
@@ -62,23 +62,26 @@ class _deleteState extends State<delete> {
             ),
             TextFormField(
               // initialValue: Preference.pref.getString("name"),
-              controller: deleteNameController,
+              controller: deletenameController,
               style: pelletStyle,
               cursorColor: kWhiteColor,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(10),
                 focusColor: kWhiteColor,
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                 ),
               ),
             ),
@@ -94,16 +97,19 @@ class _deleteState extends State<delete> {
                 contentPadding: const EdgeInsets.all(10),
                 focusColor: kWhiteColor,
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                 ),
               ),
             ),
@@ -126,16 +132,19 @@ class _deleteState extends State<delete> {
                 contentPadding: const EdgeInsets.all(10),
                 focusColor: kWhiteColor,
                 focusedBorder: OutlineInputBorder(
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                   borderRadius: BorderRadius.circular(4),
                 ),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(4),
-                  borderSide: const BorderSide(color: ktextfildecolor, width: 2.0),
+                  borderSide:
+                      const BorderSide(color: ktextfildecolor, width: 2.0),
                 ),
               ),
             ),
@@ -207,8 +216,8 @@ class _deleteState extends State<delete> {
   }
 }
 
-class deleteModel {
+class DeleteModel {
   String text;
   bool isSelect = false;
-  deleteModel(this.text, this.isSelect);
+  DeleteModel(this.text, this.isSelect);
 }

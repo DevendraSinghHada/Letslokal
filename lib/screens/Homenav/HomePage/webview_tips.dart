@@ -4,17 +4,17 @@ import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class webview_tips extends StatefulWidget {
+class WebViewTips extends StatefulWidget {
   final String title;
   final String url;
-  const webview_tips({Key? key, required this.title, required this.url})
+  const WebViewTips({Key? key, required this.title, required this.url})
       : super(key: key);
 
   @override
-  State<webview_tips> createState() => _webview_tipsState();
+  State<WebViewTips> createState() => _WebViewTipsState();
 }
 
-class _webview_tipsState extends State<webview_tips> {
+class _WebViewTipsState extends State<WebViewTips> {
   @override
   void initState() {
     if (Platform.isAndroid) {

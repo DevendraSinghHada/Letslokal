@@ -20,7 +20,7 @@ const myQuestImage = "assets/image-png/test3.jpg";
 const profileImage = "assets/image-png/profiletest5.jpg";
 
 //white color logo for bottom nav
-const WhiteLogo = "assets/image-png/logolokal-White.png";
+const whiteLogo = "assets/image-png/logolokal-White.png";
 
 // BottomNav icon images
 const whiteDashboard = "assets/image-png/dashboardWhite.png";

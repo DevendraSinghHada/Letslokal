@@ -13,6 +13,7 @@ class SelectedQuest extends StatefulWidget {
 }
 
 class _SelectedQuestState extends State<SelectedQuest> {
+  @override
   void initState() {
     if (Platform.isAndroid) {
       WebView.platform = SurfaceAndroidWebView();

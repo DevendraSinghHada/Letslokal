@@ -90,11 +90,11 @@ class _DrawermainState extends State<Drawermain> {
                 children: [
                   Column(
                     children: [
-                      ExpansionRow(context, "Home", HomeNav(selectindex: 1)),
+                      expansionRow(context, "Home", HomeNav(selectindex: 1)),
                       Padding(
                           padding: EdgeInsets.only(
                               top: hm * 0.02, bottom: hm * 0.02),
-                          child: ExpansionRow(
+                          child: expansionRow(
                               context, "Quests", HomeNav(selectindex: 4))),
                       Row(
                         children: [
@@ -158,25 +158,25 @@ class _DrawermainState extends State<Drawermain> {
                 children: [
                   Column(
                     children: [
-                      ExpansionRow(context, "Profile", const Profile()),
+                      expansionRow(context, "Profile", const Profile()),
                       SizedBox(
                         height: hm * 0.02,
                       ),
-                      ExpansionRow(context, "Account", HomeNav(selectindex: 5)),
+                      expansionRow(context, "Account", HomeNav(selectindex: 5)),
                       SizedBox(
                         height: hm * 0.02,
                       ),
-                      ExpansionRow(
+                      expansionRow(
                           context, "My Quest", HomeNav(selectindex: 3)),
                       SizedBox(
                         height: hm * 0.02,
                       ),
-                      ExpansionRow(
+                      expansionRow(
                           context, "Wishlist", HomeNav(selectindex: 2)),
                       SizedBox(
                         height: hm * 0.02,
                       ),
-                      ExpansionRow(context, "Cart", const Cart())
+                      expansionRow(context, "Cart", const Cart())
                     ],
                   ),
                 ],
@@ -199,16 +199,16 @@ class _DrawermainState extends State<Drawermain> {
                 children: [
                   Column(
                     children: [
-                      ExpansionRow(context, "About Us", const About()),
+                      expansionRow(context, "About Us", const About()),
                       SizedBox(
                         height: hm * 0.02,
                       ),
-                      ExpansionRow(
+                      expansionRow(
                           context, "How Quests Work", const HowtoJoine()),
                       SizedBox(
                         height: hm * 0.02,
                       ),
-                      ExpansionRow(context, "Contact Us", const Contactus()),
+                      expansionRow(context, "Contact Us", const Contactus()),
                     ],
                   ),
                 ],

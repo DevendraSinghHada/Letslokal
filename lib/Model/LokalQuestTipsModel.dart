@@ -5,9 +5,9 @@
 
 import 'dart:convert';
 
-LQdata LQdataFromJson(String str) => LQdata.fromJson(json.decode(str));
+LQdata lqdataFromJson(String str) => LQdata.fromJson(json.decode(str));
 
-String LQdataToJson(LQdata data) => json.encode(data.toJson());
+String lqdataToJson(LQdata data) => json.encode(data.toJson());
 
 class LQdata {
   LQdata({this.status, this.msg, this.data, this.post});

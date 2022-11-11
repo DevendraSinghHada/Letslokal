@@ -38,7 +38,6 @@ class _MyWishlistState extends State<MyWishlist> {
       });
     });
 
-    // TODO: implement initState
     super.initState();
   }
 
@@ -156,8 +155,9 @@ class _MyWishlistState extends State<MyWishlist> {
                       height: hm * 0.065,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          onSurface: kWhiteColor,
                           side: const BorderSide(color: kWhiteColor, width: 1),
+                          disabledForegroundColor:
+                              kWhiteColor.withOpacity(0.38),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),
@@ -180,8 +180,9 @@ class _MyWishlistState extends State<MyWishlist> {
                       height: hm * 0.065,
                       child: OutlinedButton(
                         style: OutlinedButton.styleFrom(
-                          onSurface: kWhiteColor,
                           side: const BorderSide(color: kWhiteColor, width: 1),
+                          disabledForegroundColor:
+                              kWhiteColor.withOpacity(0.38),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(30),
                           ),

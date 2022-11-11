@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/OnBoarding/login-screen.dart';
 import 'package:letslokal/utils/dftbutton.dart';
 
 import '../utils/constant/screennavigation.dart';
+import '../utils/preference.dart';
 import '../utils/styleguide/colors..dart';
 import '../utils/styleguide/textstyle.dart';
 
@@ -17,6 +19,7 @@ Container checkCircle() {
         shape: BoxShape.circle,
         color: kWhiteColor,
         border:
+            // ignore: dead_code
             Border.all(color: isSelect ? kblueColor : kBlackColor, width: 2)),
     child: Center(
       child: Padding(
@@ -41,7 +44,7 @@ Container dotCircle(BuildContext context) {
 }
 
 // Reusable expansion row in drawer main
-Row ExpansionRow(BuildContext context, String text, Widget name) {
+Row expansionRow(BuildContext context, String text, Widget name) {
   return Row(
     children: [
       dotCircle(context),
@@ -95,8 +98,7 @@ const circleloader = Center(
   child: CircularProgressIndicator.adaptive(),
 );
 
-// log in pop
-
+// log in pop showing when user is not logged inn
 loginDialogue(BuildContext context) {
   return showDialog(
       context: context,
@@ -151,6 +153,108 @@ loginDialogue(BuildContext context) {
               ),
             ),
           ],
+        );
+      });
+}
+
+// loginpop : used to show while user is a guest user then log in first to continue
+SizedBox logInPopUp(BuildContext context) {
+  return SizedBox(
+    child: Center(
+        child: Container(
+      height: hm * 0.2,
+      width: wm * 0.6,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(15),
+        color: ktextfildecolor,
+      ),
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Center(
+          child: Text(
+            "Please login to continue",
+            style: textW.copyWith(fontSize: 18),
+          ),
+        ),
+        SizedBox(
+          height: hm * 0.02,
+        ),
+        DefaultEButton(
+          width: wm * 0.2,
+          height: hm * 0.05,
+          radius: 8,
+          press: () {
+            pushTo(context, const LoginPage());
+          },
+          color: kcolorlogin,
+          child: Text(
+            "Log in ",
+            style: textW,
+          ),
+        ),
+      ]),
+    )),
+  );
+}
+
+// logout Dialog
+logOut(BuildContext context, StateSetter setState) {
+  return showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: ktextfildecolor,
+          content: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              DefaultEButton(
+                width: wm * 0.2,
+                height: hm * 0.05,
+                radius: 8,
+                press: () {
+                  isNewUser = true;
+                  String remName, remPass;
+                  bool checkBoxClicked;
+
+                  checkBoxClicked =
+                      Preference.pref.getBool("CheckboxClicked") ?? false;
+                  remName = Preference.pref.getString("RememberName") ?? "";
+                  remPass = Preference.pref.getString("RememberPass") ?? "";
+
+                  Preference.pref.clear();
+
+                  Preference.pref.setString("RememberedName", remName);
+                  Preference.pref.setString("RememberedPass", remPass);
+                  Preference.pref.setBool("ClickedCheckbox", checkBoxClicked);
+
+                  pushNdRemove(context, const LoginPage());
+                  setState(() {});
+                },
+                color: kcolorlogin,
+                child: Text(
+                  "Yes",
+                  style: textW,
+                ),
+              ),
+              DefaulatOBtn(
+                  width: wm * 0.2,
+                  fontSize: 14,
+                  RadiusClr: kcolorlogin,
+                  height: hm * 0.05,
+                  text: "No",
+                  radius: 8,
+                  press: () {
+                    Navigator.pop(context);
+                  },
+                  textClr: kcolorlogin,
+                  color: ktextfildecolor)
+            ],
+          ),
+          title: Center(
+            child: Text(
+              "Are you sure you want to logout?",
+              style: ffText,
+            ),
+          ),
         );
       });
 }

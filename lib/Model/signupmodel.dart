@@ -57,7 +57,7 @@ class Data {
   String? userActivationKey;
   String? userStatus;
   String? displayName;
-  dynamic? alpha;
+  dynamic alpha;
 
   factory Data.fromJson(Map<String, dynamic> json) => Data(
         id: json["ID"],

@@ -3,13 +3,13 @@ import 'package:fluttericon/font_awesome5_icons.dart';
 import 'package:letslokal/Services/auth.dart';
 import 'package:letslokal/components/components.dart';
 import 'package:letslokal/main.dart';
-import 'package:letslokal/Services/SocialLogin/authService.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/screens/OnBoarding/register.dart';
 import 'package:letslokal/utils/constant/images.dart';
 import 'package:letslokal/utils/dfttextformfield.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
+import '../../Services/SocialLogin/authService.dart';
 import '../../utils/constant/screennavigation.dart';
 import '../../utils/dftbutton.dart';
 import '../../utils/styleguide/textstyle.dart';
@@ -262,7 +262,7 @@ class _LoginPageState extends State<LoginPage> {
                               color: kcolorfacebook,
                               iconS: Icons.facebook_outlined,
                               press: () async {
-                                await authService.facebookLogin();
+                                await AuthService.facebookLogin();
                               },
                               text: " Facebook",
                             )),
@@ -275,7 +275,7 @@ class _LoginPageState extends State<LoginPage> {
                               iconS: FontAwesome5.google,
                               text: " Google",
                               press: () async {
-                                await authService.googleLogin();
+                                await AuthService.googleLogin();
                               },
                               color: kcolorgoogle),
                         ),
@@ -345,14 +345,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  // void check_if_already_Login() async {
-  //   Preference.pref = await SharedPreferences.getInstance();
-  //   newUser = (Preference.pref.getBool('login') ?? true);
-
-  //   print(newUser);
-  //   if (newUser == false) {
-  //     replaceRoute(context, HomeNav(selectindex: 1));
-  //   }
-  // }
 }

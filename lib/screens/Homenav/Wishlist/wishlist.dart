@@ -1,4 +1,3 @@
-import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:letslokal/Model/wishListData.dart';
 import 'package:letslokal/Services/auth.dart';
 import 'package:letslokal/components/components.dart';
@@ -24,7 +23,7 @@ class _WishlistState extends State<Wishlist> {
   // bool hasData = true;
 
   WishListData favListData = WishListData();
-  List<favData> data = [];
+  List<FavData> data = [];
 
   @override
   void initState() {
@@ -41,7 +40,6 @@ class _WishlistState extends State<Wishlist> {
       });
     });
 
-    // TODO: implement initState
     super.initState();
   }
 
@@ -50,10 +48,10 @@ class _WishlistState extends State<Wishlist> {
     return Scaffold(
       appBar: myAppBar(context, false),
       backgroundColor: kBlackColor,
-      body: Padding(
-        padding:
-            EdgeInsets.only(left: hm * 0.03, top: hm * 0.03, right: wm * 0.03),
-        child: SingleChildScrollView(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.only(
+              left: hm * 0.03, top: hm * 0.03, right: wm * 0.03),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [

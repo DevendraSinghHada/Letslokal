@@ -43,7 +43,6 @@ class _MainPageState extends State<MainPage> {
       });
     });
 
-    // TODO: implement initState
     super.initState();
   }
 
@@ -187,7 +186,7 @@ class _MainPageState extends State<MainPage> {
                               onTap: () {
                                 pushTo(
                                     context,
-                                    webview_quest(
+                                    WebViewQuests(
                                       title: lqdata.data!
                                           .elementAt(index)
                                           .productName
@@ -412,7 +411,7 @@ class _MainPageState extends State<MainPage> {
                                       onTap: () {
                                         pushTo(
                                             context,
-                                            webview_tips(
+                                            WebViewTips(
                                                 title: lqdata.post!
                                                     .elementAt(index)
                                                     .productName!,

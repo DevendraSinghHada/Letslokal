@@ -36,11 +36,6 @@ class _RegisterState extends State<Register> {
 
   bool isEmail(String input) => EmailValidator.validate(input);
 
-  // static var email = "tony@starkindustries.com";
-  // final bool isValid = RegExp(
-  //         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-  //     .hasMatch(email);
-
   @override
   Widget build(BuildContext context) {
     Size = MediaQuery.of(context).size;
@@ -185,7 +180,6 @@ class _RegisterState extends State<Register> {
                               color: kWhiteColor,
                             ),
                           ),
-
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Please Enter Password";
@@ -195,11 +189,6 @@ class _RegisterState extends State<Register> {
                               return null;
                             }
                           },
-                          // validator: MultiValidator([
-                          //   RequiredValidator(errorText: "Please Enter Password"),
-                          //   PasswordValidator(
-                          //       errorText: "Please Enter Vaild Password ")
-                          // ]),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
@@ -310,7 +299,7 @@ class _RegisterState extends State<Register> {
                               color: kcolorfacebook,
                               iconS: Icons.facebook_outlined,
                               press: () async {
-                                authService.facebookLogin();
+                                AuthService.facebookLogin();
                               },
                               text: " Facebook",
                             )),
@@ -323,7 +312,7 @@ class _RegisterState extends State<Register> {
                               iconS: FontAwesome5.google,
                               text: " Google",
                               press: () async {
-                                await authService.googleLogin();
+                                await AuthService.googleLogin();
                               },
                               color: kcolorgoogle),
                         ),
@@ -351,10 +340,13 @@ class _RegisterState extends State<Register> {
                             style: textW,
                           ))),
                 ),
-                Text('Privacy Policy.',
-                    style: textW.copyWith(
-                      color: kblueColor,
-                    )),
+                Center(
+                    child: TextButton(
+                        child: Text('Privacy Policy.',
+                            style: textW.copyWith(
+                              color: kblueColor,
+                            )),
+                        onPressed: () {}))
               ],
             ),
           ),

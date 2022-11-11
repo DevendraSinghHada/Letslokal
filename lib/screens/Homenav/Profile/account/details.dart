@@ -10,22 +10,21 @@ import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
 import 'package:flutter/material.dart';
 
-class details extends StatefulWidget {
-  const details({super.key});
+class Details extends StatefulWidget {
+  const Details({super.key});
 
   @override
-  State<details> createState() => _detailsState();
+  State<Details> createState() => _DetailsState();
 }
 
-class _detailsState extends State<details> {
+class _DetailsState extends State<Details> {
   final _formkey = GlobalKey<FormState>();
 
   bool isCurrent = false;
   bool isNew = false;
   bool isConfirm = false;
 
-
-bool isMadeChanges = false;
+  bool isMadeChanges = false;
   // controller for name field
   TextEditingController nameController =
       TextEditingController(text: Preference.pref.getString("username") ?? "");
@@ -208,7 +207,7 @@ bool isMadeChanges = false;
                               obscureText: isNew ? false : true,
                               style: pelletStyle,
                               cursorColor: kWhiteColor,
-                               onChanged: (value) {
+                              onChanged: (value) {
                                 isMadeChanges = true;
                               },
                               // validator: (value) {
@@ -263,7 +262,7 @@ bool isMadeChanges = false;
                             TextFormField(
                               autovalidateMode:
                                   AutovalidateMode.onUserInteraction,
-                                   onChanged: (value) {
+                              onChanged: (value) {
                                 isMadeChanges = true;
                               },
                               controller: newCPassController,
@@ -344,51 +343,46 @@ bool isMadeChanges = false;
                         radius: 12,
                         press: () async {
                           if (_formkey.currentState!.validate()) {
+                            if (isMadeChanges == true) {
+                              setState(() {
+                                loading = true;
+                              });
 
-if(isMadeChanges == true){
-                            setState(() {
-                              loading = true;
-
-                            });
-
-  
-
-                            await updateProfileData(
-                                    Preference.pref.getString("ID"),
-                                    displayNameController.text.toString(),
-                                    nameController.text.toString(),
-                                    currentPassController.text.toString(),
-                                    newPassController.text.toString())
-                                .whenComplete(() {
-                              setState(() {});
-                            }).whenComplete(() => snackbr(context, "Profile updated Successfuly", kgreenclr));
-                            // .whenComplete(
-                            //   () {
-                            //     if (displayNameController.text.isEmpty &&
-                            //         currentPassController.text.isEmpty ||
-                            //         newPassController.text.isEmpty ||
-                            //         newCPassController.text.isEmpty) {
-                            //       snackbr(
-                            //           context,
-                            //           "Please enter details to edit",
-                            //           kredColor);
-                            //     } else {
-                            //       snackbr(context, "Profile Updated Successfully", kgreenclr);
-                            //     }
-                            //   },
-                            // );
-                            setState(() {
-                              loading = false;
-                            });
-                          }
-                          else {
-                            snackbr(
+                              await updateProfileData(
+                                      Preference.pref.getString("ID"),
+                                      displayNameController.text.toString(),
+                                      nameController.text.toString(),
+                                      currentPassController.text.toString(),
+                                      newPassController.text.toString())
+                                  .whenComplete(() {
+                                setState(() {});
+                              }).whenComplete(() => snackbr(
                                       context,
-                                      "Please enter details to edit",
-                                      kredColor);
+                                      "Profile updated Successfuly",
+                                      kgreenclr));
+                              // .whenComplete(
+                              //   () {
+                              //     if (displayNameController.text.isEmpty &&
+                              //         currentPassController.text.isEmpty ||
+                              //         newPassController.text.isEmpty ||
+                              //         newCPassController.text.isEmpty) {
+                              //       snackbr(
+                              //           context,
+                              //           "Please enter details to edit",
+                              //           kredColor);
+                              //     } else {
+                              //       snackbr(context, "Profile Updated Successfully", kgreenclr);
+                              //     }
+                              //   },
+                              // );
+                              setState(() {
+                                loading = false;
+                              });
+                            } else {
+                              snackbr(context, "Please enter details to edit",
+                                  kredColor);
+                            }
                           }
-                          }
-                          
                         },
                         color: kbttnColor,
                         child: Center(
@@ -407,7 +401,7 @@ if(isMadeChanges == true){
                   text: "Delete account",
                   radius: 16,
                   press: () {
-                    pushTo(context, const delete());
+                    pushTo(context, const Delete());
                   },
                   textClr: kWhiteColor.withOpacity(0.4),
                   color: kBlackColor),

@@ -1,22 +1,23 @@
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/screens/Homenav/MyQuest/quest_outbreak/ChatPage.dart';
+
 import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
 
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 
-class quest_outbreak extends StatefulWidget {
-  const quest_outbreak({Key? key}) : super(key: key);
+class SelectedQuestDetails extends StatefulWidget {
+  const SelectedQuestDetails({Key? key}) : super(key: key);
 
   @override
-  State<quest_outbreak> createState() => _quest_outbreakState();
+  State<SelectedQuestDetails> createState() => _SelectedQuestDetailsState();
 }
 
-class _quest_outbreakState extends State<quest_outbreak> {
-  final List<Widget> _Pages = [
-    const Out_one(),
-    OutVideo(),
+class _SelectedQuestDetailsState extends State<SelectedQuestDetails> {
+  final List<Widget> pages = [
+    const OutOne(),
+    const OutVideo(),
     const OutDetails(),
     const OutScoreAndRank(),
     const AlltheBest(),
@@ -59,7 +60,7 @@ class _quest_outbreakState extends State<quest_outbreak> {
                   controller: controller,
                   physics: const NeverScrollableScrollPhysics(),
                   pageSnapping: false,
-                  itemCount: _Pages.length,
+                  itemCount: pages.length,
                   scrollDirection: Axis.vertical,
                   itemBuilder: (context, index) {
                     return Padding(
@@ -99,22 +100,29 @@ class _quest_outbreakState extends State<quest_outbreak> {
                                         ],
                                       ),
                                     ),
-                              _Pages[index],
-                              index == _Pages.length - 1
+                              pages[index],
+                              index == pages.length - 1
                                   ? SizedBox(
                                       height: hm * 0.065,
                                       width: wm * 0.17,
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            onSurface: isShowButton
-                                                ? kWhiteColor
-                                                : kBlackColor,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                                 side: const BorderSide(
                                                     color: kGreyColor,
                                                     width: 3)),
+                                            disabledForegroundColor:
+                                                isShowButton
+                                                    ? kWhiteColor
+                                                    : kBlackColor
+                                                        .withOpacity(0.38),
+                                            disabledBackgroundColor:
+                                                isShowButton
+                                                    ? kWhiteColor
+                                                    : kBlackColor
+                                                        .withOpacity(0.12),
                                           ),
                                           onPressed: isShowButton
                                               ? () {}
@@ -141,13 +149,16 @@ class _quest_outbreakState extends State<quest_outbreak> {
                                       width: wm * 0.23,
                                       child: ElevatedButton(
                                           style: ElevatedButton.styleFrom(
-                                            onSurface: kbttnColor,
                                             shape: RoundedRectangleBorder(
                                                 borderRadius:
                                                     BorderRadius.circular(8),
                                                 side: const BorderSide(
                                                     color: kcolortrivango,
                                                     width: 3)),
+                                            disabledForegroundColor:
+                                                kbttnColor.withOpacity(0.38),
+                                            disabledBackgroundColor:
+                                                kbttnColor.withOpacity(0.12),
                                           ),
                                           onPressed: () {
                                             controller.nextPage(
@@ -174,7 +185,7 @@ class _quest_outbreakState extends State<quest_outbreak> {
                                             ],
                                           )),
                                     ),
-                              if (index == _Pages.length - 1)
+                              if (index == pages.length - 1)
                                 isShowButton ? showButton() : const SizedBox()
                             ]));
                   },
@@ -193,14 +204,15 @@ class _quest_outbreakState extends State<quest_outbreak> {
         width: wm * 0.48,
         child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              onSurface: kbttnColor,
               shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8),
                   side: const BorderSide(color: kcolortrivango, width: 3)),
+              disabledForegroundColor: kbttnColor.withOpacity(0.38),
+              disabledBackgroundColor: kbttnColor.withOpacity(0.12),
             ),
             onPressed: () {
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => const ChatPage()));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const ChatPage()));
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -223,8 +235,8 @@ class _quest_outbreakState extends State<quest_outbreak> {
   }
 }
 
-class Out_one extends StatelessWidget {
-  const Out_one({Key? key}) : super(key: key);
+class OutOne extends StatelessWidget {
+  const OutOne({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -280,6 +292,8 @@ class Out_one extends StatelessWidget {
 }
 
 class OutVideo extends StatefulWidget {
+  const OutVideo({super.key});
+
   @override
   State<OutVideo> createState() => _OutVideoState();
 }

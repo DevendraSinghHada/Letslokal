@@ -7,19 +7,21 @@ import 'package:flutter/material.dart';
 class Orders extends StatefulWidget {
   const Orders({super.key});
 
+  // final callback;
+
+  // Orders({this.callback});
+
   @override
   State<Orders> createState() => _OrdersState();
 }
 
 class _OrdersState extends State<Orders> {
   @override
-  void initState() {
-    isOrder;
-    super.initState();
+  Widget build(BuildContext context) {
+    return orders();
   }
 
-  @override
-  Widget build(BuildContext context) {
+  SizedBox orders() {
     return SizedBox(
         child: Column(
       children: [
@@ -104,6 +106,9 @@ class _OrdersState extends State<Orders> {
                   setState(() {
                     isOrder = false;
                   });
+
+                  // widget.callback!();
+
                   // Navigator.canPop(context).pop(context);
                   print("view $isOrder");
                 },

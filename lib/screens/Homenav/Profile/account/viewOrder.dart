@@ -5,16 +5,28 @@ import 'package:flutter/material.dart';
 import '../../../../utils/styleguide/colors..dart';
 import '../../../../utils/styleguide/textstyle.dart';
 
-class viewOrder extends StatefulWidget {
-  const viewOrder({super.key});
+class ViewOrder extends StatefulWidget {
+  const ViewOrder({super.key});
 
   @override
-  State<viewOrder> createState() => _viewOrderState();
+  State<ViewOrder> createState() => _ViewOrderState();
 }
 
-class _viewOrderState extends State<viewOrder> {
+class _ViewOrderState extends State<ViewOrder> {
+  // @override
+  // void initState() {
+  //   setState(() {
+  //     isOrder = false;
+  //   });
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context) {
+    return viewOrders(context);
+  }
+
+  Column viewOrders(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

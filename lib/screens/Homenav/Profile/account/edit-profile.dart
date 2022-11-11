@@ -1,4 +1,3 @@
-import 'package:letslokal/components/components.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/utils/constant/screennavigation.dart';

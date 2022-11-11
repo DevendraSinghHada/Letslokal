@@ -73,7 +73,7 @@ class _MyQuestState extends State<MyQuest> {
                           onTap: () {
                             pushTo(
                                 context,
-                                webview_quest(
+                                WebViewQuests(
                                   title: lQdata.data!
                                       .elementAt(index)
                                       .productName

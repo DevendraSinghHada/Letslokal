@@ -1,4 +1,3 @@
-
 // To parse this JSON data, do
 //
 //     final wishListData = wishListDataFromJson(jsonString);
@@ -19,12 +18,12 @@ class WishListData {
 
   int? status;
   String? msg;
-  List<favData>? data =[];
+  List<FavData>? data = [];
 
   factory WishListData.fromJson(Map<String, dynamic> json) => WishListData(
         status: json["status"],
         msg: json["msg"],
-        data: List<favData>.from(json["data"].map((x) => favData.fromJson(x))),
+        data: List<FavData>.from(json["data"].map((x) => FavData.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -34,20 +33,20 @@ class WishListData {
       };
 }
 
-class favData {
-  favData({
+class FavData {
+  FavData({
     this.wishlistId,
     this.productName,
     this.productImage,
     this.link,
   });
 
-  String? wishlistId ;
-  String? productName ;
-  String? productImage ;
-  String? link ;
+  String? wishlistId;
+  String? productName;
+  String? productImage;
+  String? link;
 
-  factory favData.fromJson(Map<String, dynamic> json) => favData(
+  factory FavData.fromJson(Map<String, dynamic> json) => FavData(
         wishlistId: json["wishlistId"] ?? "",
         productName: json["productName"] ?? "",
         productImage: json["productImage"] ?? "",

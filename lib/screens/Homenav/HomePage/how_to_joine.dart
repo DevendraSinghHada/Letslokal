@@ -5,7 +5,6 @@ import '../../../utils/styleguide/textstyle.dart';
 
 import 'package:carousel_slider/carousel_slider.dart';
 
-
 class HowtoJoine extends StatefulWidget {
   const HowtoJoine({Key? key}) : super(key: key);
 
@@ -19,8 +18,7 @@ class _HowtoJoineState extends State<HowtoJoine> {
   Color _textTColor = kWhiteColor;
   Color _textFourColor = kWhiteColor;
 
-  Color _SelectIconColor = kWhiteColor;
-
+  late Color selectIconColor = kWhiteColor;
   @override
   Widget build(BuildContext context) {
     // size = MediaQuery.of(context).size;
@@ -492,12 +490,12 @@ class _HowtoJoineState extends State<HowtoJoine> {
                 ],
               ),
               ExpansionTile(
-                collapsedIconColor: _SelectIconColor,
+                collapsedIconColor: selectIconColor,
                 tilePadding: EdgeInsets.zero,
                 onExpansionChanged: (expanded) {
                   setState(() {
                     if (expanded) {
-                      _SelectIconColor = kWhiteColor;
+                      selectIconColor = kWhiteColor;
                       _textSColor = kcolorlogin;
                     } else {
                       _textSColor = kWhiteColor;

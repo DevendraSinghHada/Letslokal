@@ -16,37 +16,37 @@ import '../Model/loginmodel.dart';
 
 //login
 
-var apiLdata;
-var apiLmsg;
-var apiLstatus;
+//  var apiLdata;
+late String apiLmsg;
+late int apiLstatus;
 
 //signUp
-var apiSdata;
-var apiSmsg;
-var apiRegstatus;
+
+late String apiSmsg;
+late int apiRegstatus;
 
 //ranking Api
 
-var myUrl;
+late String myUrl;
 
 // wishlist api
-var WishMsg;
+late String wishMsg;
 
 // removeWishlist Api
 
-var removeListMsg;
-var removeListStatus;
+late String removeListMsg;
+late int removeListStatus;
 
 // var user_Name = "";
 // var user_Password = "";
 
 //HomePage Section 1
 
-var lokalquestdata;
-var lqmsg;
+// var lokalquestdata;
+late String lqmsg;
 
 // Update data API variables
-var updateMsg;
+late String updateMsg;
 
 // SignUp API
 Future fetchsignUpData(BuildContext context, String name, String username,
@@ -103,7 +103,7 @@ Future fetchLoginData(
       "username": username,
       "password": password,
     });
-    apiLdata = json.decode(response.body);
+    var apiLdata = json.decode(response.body);
     apiLmsg = apiLdata["msg"];
     apiLstatus = apiLdata["status"];
 
@@ -148,10 +148,10 @@ Future fetchLQdata(String userId) async {
     final response = await http
         .post(Uri.parse(baseUrl + uHomePageApi), body: {"userId": userId});
 
-    lokalquestdata = json.decode(response.body);
+    var lokalquestdata = json.decode(response.body);
     var lqStatus = lokalquestdata["status"];
     if (response.statusCode == 200) {
-      LQdata lqdata = LQdataFromJson(response.body.toString());
+      LQdata lqdata = lqdataFromJson(response.body.toString());
 
       if (lqStatus == 200) {
         Preference.pref.setString(
@@ -166,7 +166,7 @@ Future fetchLQdata(String userId) async {
 
       return lqdata;
 
-      print("$lqmsg");
+      // print("$lqmsg");
     }
   } catch (e) {
     print(e.toString());
@@ -185,14 +185,14 @@ Future updateProfileData(String userId, String name, String displayName,
       "old_password": oldPassword,
       "new_password": newPassword
     });
-    var UpdatedData = json.decode(res.body);
+    var updateProfile = json.decode(res.body);
 
-    var msg = UpdatedData["msg"];
+    var msg = updateProfile["msg"];
 
     if (res.statusCode == 200) {
       UpdateProfile updateProfile = updateProfileFromJson(res.body.toString());
 
-      updateMsg = updateProfile.msg;
+      // updateMsg = updateProfile.msg;
 
       if (msg == "Success") {
         Preference.pref.setString("userId", updateProfile.user!.data!.id);
@@ -255,19 +255,21 @@ Future wishListData(String userId) async {
         .post(Uri.parse(baseUrl + uWishlistApi), body: {"userId": userId});
 
     var data = json.decode(response.body);
-    WishMsg = data["msg"];
+    wishMsg = data["msg"];
 
     if (response.statusCode == 200) {
       WishListData favListData = wishListDataFromJson(response.body.toString());
 
-      if (WishMsg == "Success") {
+      if (wishMsg == "Success") {
         print("Here is your wihslist data $favListData");
 
         Preference.pref.setString("userId", userId);
       }
       return favListData;
     }
-  } catch (e) {}
+  } catch (e) {
+    print(e.toString());
+  }
 }
 
 // remove from Wishlist Api
@@ -333,7 +335,7 @@ Future myQuest(String userId) async {
 
     var myQuestData = json.decode(respose.body);
 
-    var myQuestsMsg = myQuestData["msg"];
+    // var myQuestsMsg = myQuestData["msg"];
     var myQuestsStatus = myQuestData["status"];
 
     if (respose.statusCode == 200) {

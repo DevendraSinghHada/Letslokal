@@ -1,18 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
 
-// late final GlobalKey<NavigatorState>? navigatorKey;
-
-// isExists() {
-//   if (Preference.pref.getString("ID")) {}
-
-//   return 1;
-// }
-
 var Size, hm, wm;
-
-// Size = MediaQuery.of(context).size;
 
 const Color _textColor = Color(0xFF1f836b);
 
