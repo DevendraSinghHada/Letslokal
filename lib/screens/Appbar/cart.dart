@@ -38,7 +38,7 @@ class _CartState extends State<Cart> {
               ),
             ),
           ),
-          DefaulatOBtn(
+          DefaultOutButton(
               width: wm * 0.37,
               RadiusClr: kcolorlogin,
               height: hm * 0.072,

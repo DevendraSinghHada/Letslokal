@@ -25,6 +25,9 @@ class Register extends StatefulWidget {
 class _RegisterState extends State<Register> {
   final _formkey = GlobalKey<FormState>();
 
+  // bool for loader
+  bool isRegistering = false;
+
   bool isChecked = false;
   bool isPass = false;
   bool isCpass = false;
@@ -237,7 +240,7 @@ class _RegisterState extends State<Register> {
                           child: Padding(
                               padding: EdgeInsets.only(
                                   top: hm * 0.031, bottom: hm * 0.035),
-                              child: loading == true
+                              child: isRegistering == true
                                   ? circleloader
                                   : DefaultEButton(
                                       width: wm * 0.26,
@@ -246,7 +249,7 @@ class _RegisterState extends State<Register> {
                                         if (_formkey.currentState!.validate()) {
                                           isNewUser = false;
                                           setState(() {
-                                            loading = true;
+                                            isRegistering = true;
                                           });
                                           await fetchsignUpData(
                                                   context,
@@ -271,7 +274,7 @@ class _RegisterState extends State<Register> {
                                           });
 
                                           setState(() {
-                                            loading = false;
+                                            isRegistering = false;
                                           });
                                         } else if (nameController
                                                 .text.isEmpty &&

@@ -1,7 +1,6 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:letslokal/Services/auth.dart';
 import 'package:letslokal/components/components.dart';
-import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Homenav/Profile/account/delete.dart';
 import 'package:letslokal/utils/constant/screennavigation.dart';
 import 'package:letslokal/utils/dftbutton.dart';
@@ -9,6 +8,8 @@ import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../utils/dfttextformfield.dart';
 
 class Details extends StatefulWidget {
   const Details({super.key});
@@ -19,6 +20,9 @@ class Details extends StatefulWidget {
 
 class _DetailsState extends State<Details> {
   final _formkey = GlobalKey<FormState>();
+
+  // bool for loader
+  bool detailsLoading= false;
 
   bool isCurrent = false;
   bool isNew = false;
@@ -44,8 +48,7 @@ class _DetailsState extends State<Details> {
 
   @override
   void initState() {
-    // updateProfileData(Preference.pref.getString("ID") ?? "",
-    //     displayNameController.text.toString(), nameController.text.toString());
+   
     super.initState();
   }
 
@@ -152,11 +155,15 @@ class _DetailsState extends State<Details> {
                               onChanged: (value) {
                                 isMadeChanges = true;
                               },
-                              // validator: (value) {
-                              //   if (value!.isEmpty) {
-                              //     return "Please enter old password";
-                              //   }
-                              // },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return null;
+                                }
+                                else if(value.length <8){
+                                  return "Please enter minimum 8 characters";
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(10),
                                 suffixIcon: IconButton(
@@ -173,21 +180,9 @@ class _DetailsState extends State<Details> {
                                   },
                                 ),
                                 focusColor: kWhiteColor,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                ),
+                                focusedBorder: accountBorder(context),
+                                border: accountBorder(context),
+                                enabledBorder: accountBorder(context),
                               ),
                             ),
                             SizedBox(
@@ -210,15 +205,18 @@ class _DetailsState extends State<Details> {
                               onChanged: (value) {
                                 isMadeChanges = true;
                               },
-                              // validator: (value) {
-                              //   if (newPassController.text.length < 3) {
-                              //     return "Very Weak - Please enter a strong password";
-                              //   } else if (newPassController.text.length < 6) {
-                              //     return "Weak - Please enter a stronger password";
-                              //   } else if (newPassController.text.length < 10) {
-                              //     return "Medium";
-                              //   }
-                              // },
+                              validator: (value) {
+                                if (value!.isEmpty) {
+                                  return null;
+                                } 
+                                else if(value.length < 8){
+                                  return 'Minimum 8 characters required';
+                                }
+                                else if(currentPassController.text.isEmpty){
+                                  return "Please enter Current Password first";
+                                }
+                                return null;
+                              },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(10),
                                 suffixIcon: IconButton(
@@ -234,21 +232,9 @@ class _DetailsState extends State<Details> {
                                   },
                                 ),
                                 focusColor: kWhiteColor,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                ),
+                                focusedBorder: accountBorder(context),
+                                border: accountBorder(context),
+                                enabledBorder: accountBorder(context),
                               ),
                             ),
                             SizedBox(height: hm * 0.06),
@@ -269,17 +255,17 @@ class _DetailsState extends State<Details> {
                               obscureText: isConfirm ? false : true,
                               style: pelletStyle,
                               cursorColor: kWhiteColor,
-                              // validator: (value) {
-                              //   if (newPassController.text !=
-                              //       newCPassController.text) {
-                              //     return "Password do not match";
-                              //   }
+                              validator: (value) {
+                                if (newPassController.text !=
+                                    newCPassController.text) {
+                                  return "Password do not match";
+                                }
 
-                              //   // if (newCPassController.text ==
-                              //   //     newPassController.text) {
-                              //   // } else
-                              //   //   return "Password do not match";
-                              // },
+                                // if (newCPassController.text ==
+                                //     newPassController.text) {
+                                // } else
+                                //   return "Password do not match";
+                              },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(10),
                                 suffixIcon: IconButton(
@@ -294,21 +280,9 @@ class _DetailsState extends State<Details> {
                                   },
                                 ),
                                 focusColor: kWhiteColor,
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                ),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  borderSide: const BorderSide(
-                                      color: ktextfildecolor, width: 2.0),
-                                ),
+                                focusedBorder:accountBorder(context),
+                                border: accountBorder(context),
+                                enabledBorder: accountBorder(context),
                               ),
                             ),
                           ],
@@ -335,7 +309,7 @@ class _DetailsState extends State<Details> {
               ]),
               Padding(
                 padding: EdgeInsets.only(top: hm * 0.03, bottom: hm * 0.05),
-                child: loading
+                child: detailsLoading
                     ? circleloader
                     : DefaultEButton(
                         width: wm * 0.34,
@@ -345,7 +319,7 @@ class _DetailsState extends State<Details> {
                           if (_formkey.currentState!.validate()) {
                             if (isMadeChanges == true) {
                               setState(() {
-                                loading = true;
+                                detailsLoading = true;
                               });
 
                               await updateProfileData(
@@ -354,12 +328,16 @@ class _DetailsState extends State<Details> {
                                       nameController.text.toString(),
                                       currentPassController.text.toString(),
                                       newPassController.text.toString())
-                                  .whenComplete(() {
-                                setState(() {});
-                              }).whenComplete(() => snackbr(
+                                  .then((value) {
+                                    snackbr(
                                       context,
-                                      "Profile updated Successfuly",
-                                      kgreenclr));
+                                      updateMsg,
+                                      kGreyColor);
+                                setState(() {});
+                              }).catchError((error){
+
+snackbr(context, error.toString(), kredColor);
+                              });
                               // .whenComplete(
                               //   () {
                               //     if (displayNameController.text.isEmpty &&
@@ -376,7 +354,7 @@ class _DetailsState extends State<Details> {
                               //   },
                               // );
                               setState(() {
-                                loading = false;
+                                detailsLoading = false;
                               });
                             } else {
                               snackbr(context, "Please enter details to edit",
@@ -393,7 +371,7 @@ class _DetailsState extends State<Details> {
                         ),
                       ),
               ),
-              DefaulatOBtn(
+              DefaultOutButton(
                   width: wm * 0.34,
                   fontSize: 12,
                   RadiusClr: kWhiteColor.withOpacity(0.4),

@@ -68,7 +68,7 @@ class _AccountState extends State<Account> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                               children: [
-                                DefaulatOBtn(
+                                DefaultOutButton(
                                     fontSize: 12,
                                     text: "Profile",
                                     width: wm * 0.2,
@@ -80,7 +80,7 @@ class _AccountState extends State<Account> {
                                     },
                                     textClr: kWhiteColor,
                                     color: kBlackColor.withOpacity(0.1)),
-                                DefaulatOBtn(
+                                DefaultOutButton(
                                     fontSize: 12,
                                     text: "MyQuest",
                                     width: wm * 0.21,
@@ -96,7 +96,7 @@ class _AccountState extends State<Account> {
                                     },
                                     textClr: kWhiteColor,
                                     color: kBlackColor.withOpacity(0.1)),
-                                DefaulatOBtn(
+                                DefaultOutButton(
                                     fontSize: 12,
                                     text: "Wishlist",
                                     width: wm * 0.2,
@@ -112,7 +112,7 @@ class _AccountState extends State<Account> {
                                     },
                                     textClr: kWhiteColor,
                                     color: kBlackColor.withOpacity(0.1)),
-                                DefaulatOBtn(
+                                DefaultOutButton(
                                     fontSize: 12,
                                     text: "Cart",
                                     width: wm * 0.2,
@@ -546,7 +546,7 @@ class _AccountState extends State<Account> {
         SizedBox(
           height: hm * 0.1,
         ),
-        DefaulatOBtn(
+        DefaultOutButton(
             fontSize: 12,
             width: wm * 0.3,
             RadiusClr: kWhiteColor.withOpacity(0.4),

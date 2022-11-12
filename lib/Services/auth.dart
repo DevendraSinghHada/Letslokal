@@ -38,8 +38,7 @@ late String wishMsg;
 late String removeListMsg;
 late int removeListStatus;
 
-// var user_Name = "";
-// var user_Password = "";
+
 
 //HomePage Section 1
 
@@ -47,7 +46,7 @@ late int removeListStatus;
 late String lqmsg;
 
 // Update data API variables
-late String updateMsg;
+var updateMsg;
 
 // SignUp API
 Future fetchsignUpData(BuildContext context, String name, String username,
@@ -188,14 +187,14 @@ Future updateProfileData(String userId, String name, String displayName,
     });
     var updateProfile = json.decode(res.body);
 
-    var msg = updateProfile["msg"];
+     updateMsg = updateProfile["msg"];
 
     if (res.statusCode == 200) {
       UpdateProfile updateProfile = updateProfileFromJson(res.body.toString());
 
-      // updateMsg = updateProfile.msg;
 
-      if (msg == "Success") {
+
+      if (updateMsg == "Success") {
         Preference.pref.setString("userId", updateProfile.user!.data!.id);
         Preference.pref
             .setString("username", updateProfile.user!.data!.userLogin);
@@ -206,6 +205,9 @@ Future updateProfileData(String userId, String name, String displayName,
         Preference.pref.getString("name");
 
         print("Your api is running");
+      }
+      else {
+        return updateMsg;
       }
     }
   } catch (e) {

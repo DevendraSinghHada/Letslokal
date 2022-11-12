@@ -485,7 +485,7 @@ class _MainPageState extends State<MainPage> {
                             ),
                           ),
                           Center(
-                            child: DefaulatOBtn(
+                            child: DefaultOutButton(
                                 width: wm * 0.25,
                                 fontSize: 14,
                                 RadiusClr: kBlackColor,

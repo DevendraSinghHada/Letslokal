@@ -244,7 +244,7 @@ class _ViewOrderState extends State<ViewOrder> {
         SizedBox(
           height: hm * 0.1,
         ),
-        DefaulatOBtn(
+        DefaultOutButton(
             fontSize: 12,
             width: wm * 0.3,
             RadiusClr: kWhiteColor.withOpacity(0.4),

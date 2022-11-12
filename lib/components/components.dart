@@ -2,16 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/OnBoarding/login-screen.dart';
 import 'package:letslokal/utils/dftbutton.dart';
-
 import '../utils/constant/screennavigation.dart';
 import '../utils/preference.dart';
 import '../utils/styleguide/colors..dart';
 import '../utils/styleguide/textstyle.dart';
 
 // CheckCircle used in delete account button in account.dart file
-
 Container checkCircle() {
-  bool isSelect = false;
+  
   return Container(
     height: 18,
     width: 18,
@@ -94,6 +92,8 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackbr(
   ));
 }
 
+
+// Loader for making user wait while loading data
 const circleloader = Center(
   child: CircularProgressIndicator.adaptive(),
 );
@@ -137,7 +137,7 @@ loginDialogue(BuildContext context) {
                       ),
                     ),
                   ),
-                  DefaulatOBtn(
+                  DefaultOutButton(
                       width: wm * 0.18,
                       fontSize: 14,
                       RadiusClr: kcolorlogin,
@@ -235,7 +235,7 @@ logOut(BuildContext context, StateSetter setState) {
                   style: textW,
                 ),
               ),
-              DefaulatOBtn(
+              DefaultOutButton(
                   width: wm * 0.2,
                   fontSize: 14,
                   RadiusClr: kcolorlogin,

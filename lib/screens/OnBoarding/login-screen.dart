@@ -25,6 +25,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final _formkey = GlobalKey<FormState>();
 
+  // bool for loader
+  bool loginProcessing = false;
+
   TextEditingController lpasscontroller = TextEditingController(
       text: Preference.pref.getString("RememberedPass") ?? "");
   TextEditingController userController = TextEditingController(
@@ -151,9 +154,11 @@ class _LoginPageState extends State<LoginPage> {
                           validator: (value) {
                             if (value!.isEmpty) {
                               return "Please Enter Password";
-                            } else if (value.length < 8) {
+                            } 
+                            else if (value.length < 8) {
                               return "Minimum 8 characters required";
-                            } else {
+                            } 
+                            else {
                               return null;
                             }
                           },
@@ -199,7 +204,7 @@ class _LoginPageState extends State<LoginPage> {
                                 )),
                                 TextSpan(text: "  Remember Me ", style: textW)
                               ])),
-                              loading == true
+                              loginProcessing == true
                                   ? circleloader
                                   : DefaultEButton(
                                       width: wm * 0.21,
@@ -221,7 +226,7 @@ class _LoginPageState extends State<LoginPage> {
                                           }
                                           isNewUser = false;
                                           setState(() {
-                                            loading = true;
+                                            loginProcessing = true;
                                           });
 
                                           await fetchLoginData(
@@ -238,7 +243,7 @@ class _LoginPageState extends State<LoginPage> {
                                             }
                                           });
                                           setState(() {
-                                            loading = false;
+                                            loginProcessing = false;
                                           });
                                         }
                                       },
@@ -311,15 +316,15 @@ class _LoginPageState extends State<LoginPage> {
                       //       'Register | ',
                       //       style: textW,
                       //     )),
-                      TextButton(
-                          autofocus: true,
-                          onPressed: () {
-                            pushTo(context, const ForgotPassword());
-                          },
-                          child: Text(
-                            "Lost your Password?",
-                            style: textW,
-                          )),
+                      GestureDetector(
+                        onTap: () {
+                           pushTo(context, const ForgotPassword());
+                        },
+                        child: Text(
+                          "Lost your Password?",
+                          style: textW,
+                        ),
+                      ),
                       // InkWell(
                       //     onTap: () {
                       //       pushTo(context, const ForgotPassword());

@@ -156,8 +156,8 @@ class DefaultEButton extends StatelessWidget {
 }
 
 //OutLined Button
-class DefaulatOBtn extends StatelessWidget {
-  const DefaulatOBtn({
+class DefaultOutButton extends StatelessWidget {
+  const DefaultOutButton({
     Key? key,
     required this.width,
     required this.fontSize,
@@ -190,8 +190,7 @@ class DefaulatOBtn extends StatelessWidget {
       height: height,
       child: OutlinedButton(
         style: OutlinedButton.styleFrom(
-          onSurface: color,
-          side: BorderSide(color: RadiusClr, width: 1),
+          side: BorderSide(color: RadiusClr, width: 1), disabledForegroundColor: color.withOpacity(0.38),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(radius),
           ),

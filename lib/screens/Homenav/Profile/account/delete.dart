@@ -2,6 +2,7 @@ import 'package:letslokal/components/components.dart';
 import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/utils/dftbutton.dart';
+import 'package:letslokal/utils/dfttextformfield.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:letslokal/utils/styleguide/colors..dart';
 import 'package:letslokal/utils/styleguide/textstyle.dart';
@@ -19,14 +20,21 @@ class _DeleteState extends State<Delete> {
       TextEditingController(text: Preference.pref.getString("name"));
   TextEditingController deleteEmailController =
       TextEditingController(text: Preference.pref.getString("email"));
-  List<DeleteModel> deleteList = [
-    DeleteModel("-Select Reason-", false),
-    DeleteModel("I need a break,I'll be back", false),
-    DeleteModel("I want to create a new account", false),
-    DeleteModel("I have more than one account", false),
-    DeleteModel("I don't like the concept", true),
-    DeleteModel("I don't need it", true)
+
+
+  TextEditingController reasonController = TextEditingController(text:  "-Select Reason-");  
+
+  String selectText = ""; 
+   
+   List<DeleteModel> deleteList = [
+    DeleteModel("-Select Reason-"),
+    DeleteModel("I need a break,I'll be back",),
+    DeleteModel("I want to create a new account", ),
+    DeleteModel("I have more than one account", ),
+    DeleteModel("I don't like the concept", ),
+    DeleteModel("I don't need it", )
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,21 +76,9 @@ class _DeleteState extends State<Delete> {
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(10),
                 focusColor: kWhiteColor,
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                ),
+                focusedBorder: accountBorder(context),
+                border: accountBorder(context),
+                enabledBorder:accountBorder(context),
               ),
             ),
             Padding(
@@ -96,21 +92,9 @@ class _DeleteState extends State<Delete> {
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(10),
                 focusColor: kWhiteColor,
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                ),
+                focusedBorder: accountBorder(context),
+                border: accountBorder(context),
+                enabledBorder: accountBorder(context),
               ),
             ),
             Padding(
@@ -124,28 +108,16 @@ class _DeleteState extends State<Delete> {
                   showList();
                 });
               },
-              initialValue: "-Select Reason-",
-              // controller: nameController,
+              // initialValue: "-Select Reason-",
+              controller: reasonController,
               style: pelletStyle,
               cursorColor: kWhiteColor,
               decoration: InputDecoration(
                 contentPadding: const EdgeInsets.all(10),
                 focusColor: kWhiteColor,
-                focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                  borderRadius: BorderRadius.circular(4),
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  borderSide:
-                      const BorderSide(color: ktextfildecolor, width: 2.0),
-                ),
+                focusedBorder: accountBorder(context),
+                border: accountBorder(context),
+                enabledBorder:accountBorder(context),
               ),
             ),
             Padding(
@@ -181,7 +153,7 @@ class _DeleteState extends State<Delete> {
             contentPadding: EdgeInsets.zero,
             backgroundColor: kWhiteColor,
             content: StatefulBuilder(builder: (BuildContext context,
-                void Function(void Function()) setState) {
+                 StateSetter setState) {
               return SizedBox(
                 width: wm,
                 child: Column(
@@ -196,12 +168,16 @@ class _DeleteState extends State<Delete> {
                                         ? Colors.transparent
                                         : kGreyColor.withOpacity(0.5),
                                     width: 1)),
-                            onTap: (() {
-                              setState(() {
-                                isSelect = !isSelect;
-                                // Navigator.pop(context);
-                              });
-                            }),
+                            onTap: (){
+                              setState (() {
+                               reasonController.text =    deleteList.elementAt(index).text;
+                               isSelect = !isSelect;
+                              },
+                            
+                      );
+                        Navigator.pop(context);
+                      
+                      },
                             title: Text(
                               deleteList[index].text,
                               style: reasonStyle,
@@ -218,6 +194,8 @@ class _DeleteState extends State<Delete> {
 
 class DeleteModel {
   String text;
-  bool isSelect = false;
-  DeleteModel(this.text, this.isSelect);
+  // bool isSelect = false;
+  DeleteModel(this.text, 
+  // this.isSelect
+  );
 }

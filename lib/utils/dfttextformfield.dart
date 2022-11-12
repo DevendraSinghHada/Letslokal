@@ -166,8 +166,8 @@ class Dfttextformfieldborder extends StatelessWidget {
   }
 }
 
-// Borderfor textformfields
 
+// Borderfor textformfields used in textformfield (only textformfield which contains name)
 InputDecoration txtffInputDeco(
   BuildContext context,
 ) {
@@ -183,6 +183,8 @@ InputDecoration txtffInputDeco(
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)));
 }
 
+
+// textformfield decoration for log in and sign up pages  ( for password textformfield)
 InputDecoration txtffSiffixDeco(BuildContext context, Widget suffixIcon) {
   return InputDecoration(
       contentPadding: const EdgeInsets.all(10),
@@ -195,4 +197,14 @@ InputDecoration txtffSiffixDeco(BuildContext context, Widget suffixIcon) {
         borderRadius: BorderRadius.circular(4),
       ),
       border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)));
+}
+
+
+// textformfield border for account section details section 
+OutlineInputBorder accountBorder (BuildContext context){
+ return OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  borderSide: const BorderSide(
+                                      color: ktextfildecolor, width: 2.0),
+                                );
 }

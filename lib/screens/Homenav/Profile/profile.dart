@@ -18,13 +18,13 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      isFilled;
-    });
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   setState(() {
+  //     isFilled;
+  //   });
+  // }
 
   @override
   Widget build(BuildContext context) {

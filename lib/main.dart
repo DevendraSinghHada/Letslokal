@@ -8,16 +8,20 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 // bool for edit profile section
-bool isFilled = false;
+// bool isFilled = false;
 
-bool isSelect = false;
+
+// bool for selecting delete reason
+bool isSelect = true;
 
 // bool for order button used in account page
 bool isOrder = false;
-var isNewUser = Preference.pref.getBool("isNewUser") ?? true;
-// Boolians for Api
 
-bool loading = false;
+// variable for checking if user is a guest user or already logged in 
+var isNewUser = Preference.pref.getBool("isNewUser") ?? true;
+
+
+
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
