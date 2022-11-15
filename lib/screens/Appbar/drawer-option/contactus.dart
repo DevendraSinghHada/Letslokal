@@ -6,14 +6,14 @@ import 'package:flutter/material.dart';
 
 import '../../../utils/styleguide/textstyle.dart';
 
-class Contactus extends StatefulWidget {
-  const Contactus({Key? key}) : super(key: key);
+class ContactUs extends StatefulWidget {
+  const ContactUs({Key? key}) : super(key: key);
 
   @override
-  State<Contactus> createState() => _ContactusState();
+  State<ContactUs> createState() => _ContactUsState();
 }
 
-class _ContactusState extends State<Contactus> {
+class _ContactUsState extends State<ContactUs> {
   @override
   Widget build(BuildContext context) {
     Size = MediaQuery.of(context).size;

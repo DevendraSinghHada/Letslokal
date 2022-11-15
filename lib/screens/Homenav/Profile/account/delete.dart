@@ -1,5 +1,3 @@
-import 'package:letslokal/components/components.dart';
-import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/utils/dftbutton.dart';
 import 'package:letslokal/utils/dfttextformfield.dart';
@@ -24,15 +22,16 @@ class _DeleteState extends State<Delete> {
 
   TextEditingController reasonController = TextEditingController(text:  "-Select Reason-");  
 
-  String selectText = ""; 
+  // String selectText = ""; 
+  int selectindex =0;
    
-   List<DeleteModel> deleteList = [
-    DeleteModel("-Select Reason-"),
-    DeleteModel("I need a break,I'll be back",),
-    DeleteModel("I want to create a new account", ),
-    DeleteModel("I have more than one account", ),
-    DeleteModel("I don't like the concept", ),
-    DeleteModel("I don't need it", )
+   List<String> deleteList = [
+    "-Select Reason-",
+    "I need a break,I'll be back",
+    "I want to create a new account", 
+    "I have more than one account", 
+    "I don't like the concept", 
+    "I don't need it", 
   ];
 
   @override
@@ -170,8 +169,9 @@ class _DeleteState extends State<Delete> {
                                     width: 1)),
                             onTap: (){
                               setState (() {
-                               reasonController.text =    deleteList.elementAt(index).text;
-                               isSelect = !isSelect;
+                               reasonController.text =    deleteList.elementAt(index);
+                               selectindex = index;
+                              //  deleteList.elementAt(index)  = !deleteList.elementAt(index).isSelect ;
                               },
                             
                       );
@@ -179,23 +179,34 @@ class _DeleteState extends State<Delete> {
                       
                       },
                             title: Text(
-                              deleteList[index].text,
+                              deleteList[index],
                               style: reasonStyle,
                             ),
-                            trailing: checkCircle(),
-                          )),
+                            
+            trailing:                 Container(
+    height: 18,
+    width: 18,
+    decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        color: kWhiteColor,
+        border:
+            // ignore: dead_code
+            Border.all(color:  kBlackColor, width: 2)),
+    child: selectindex == index ?  const Center(
+      child: Padding(
+        padding:  EdgeInsets.all(2),
+        child: CircleAvatar(
+          // ignore: dead_code
+          backgroundColor:  kbttnColor,
+        ),
+      ),
+    ) : Container()
+  
+                          ),
                 ),
-              );
+              )));
             }),
           );
         }));
   }
-}
-
-class DeleteModel {
-  String text;
-  // bool isSelect = false;
-  DeleteModel(this.text, 
-  // this.isSelect
-  );
 }

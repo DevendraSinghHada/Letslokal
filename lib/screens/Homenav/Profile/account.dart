@@ -1,6 +1,7 @@
 import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/appbar.dart';
 import 'package:letslokal/screens/Appbar/cart.dart';
+import 'package:letslokal/screens/Homenav/Profile/account/delete.dart';
 import 'package:letslokal/screens/Homenav/Profile/account/details.dart';
 import 'package:letslokal/screens/Homenav/Profile/profile.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
@@ -553,7 +554,9 @@ class _AccountState extends State<Account> {
             height: hm * 0.04,
             text: "Delete account",
             radius: 16,
-            press: () {},
+            press: () {
+              pushTo(context,const Delete());
+            },
             textClr: kWhiteColor.withOpacity(0.4),
             color: kBlackColor),
       ],

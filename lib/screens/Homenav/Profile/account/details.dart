@@ -77,11 +77,14 @@ class _DetailsState extends State<Details> {
               TextFormField(
                   controller: displayNameController,
                   style: pelletStyle,
+                
                   onChanged: (value) {
                     isMadeChanges = true;
                   },
                   cursorColor: kWhiteColor,
-                  decoration: txtffDec()),
+                  decoration: txtffDec(
+                    
+                  )),
               SizedBox(
                 height: hm * 0.05,
               ),
@@ -99,7 +102,10 @@ class _DetailsState extends State<Details> {
                   readOnly: true,
                   style: pelletStyle,
                   cursorColor: kWhiteColor,
-                  decoration: txtffDec()),
+                  decoration: txtffDec(
+                    fillColor: ktextfildecolor,
+                    filled: true
+                  )),
               SizedBox(
                 height: hm * 0.01,
               ),
@@ -123,7 +129,10 @@ class _DetailsState extends State<Details> {
                   initialValue: Preference.pref.getString("email"),
                   style: pelletStyle,
                   cursorColor: kWhiteColor,
-                  decoration: txtffDec()),
+                  decoration: txtffDec(
+                    fillColor: ktextfildecolor,
+                    filled: true
+                  )),
               SizedBox(
                 height: hm * 0.05,
               ),
@@ -156,13 +165,18 @@ class _DetailsState extends State<Details> {
                                 isMadeChanges = true;
                               },
                               validator: (value) {
-                                if (value!.isEmpty) {
-                                  return null;
+                                if(value!.isEmpty && newPassController.text.isEmpty){
+                                  return null ;
                                 }
-                                else if(value.length <8){
+                                if (value.isEmpty && newPassController.text.isNotEmpty) {
+                                  return "Please enter Current Password";
+                                }
+                                else if(value.length <8){         
                                   return "Please enter minimum 8 characters";
                                 }
-                                return null;
+                                // else if(newPassController.text.isNotEmpty && newCPassController.text.isNotEmpty ) {
+                                //   return "Please enter Current Password first ";
+                                // }
                               },
                               decoration: InputDecoration(
                                 contentPadding: const EdgeInsets.all(10),
@@ -196,8 +210,8 @@ class _DetailsState extends State<Details> {
                               height: hm * 0.01,
                             ),
                             TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                              // autovalidateMode:
+                              //     AutovalidateMode.onUserInteraction,
                               controller: newPassController,
                               obscureText: isNew ? false : true,
                               style: pelletStyle,
@@ -212,9 +226,7 @@ class _DetailsState extends State<Details> {
                                 else if(value.length < 8){
                                   return 'Minimum 8 characters required';
                                 }
-                                else if(currentPassController.text.isEmpty){
-                                  return "Please enter Current Password first";
-                                }
+                               
                                 return null;
                               },
                               decoration: InputDecoration(
@@ -246,8 +258,8 @@ class _DetailsState extends State<Details> {
                               height: hm * 0.01,
                             ),
                             TextFormField(
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
+                              // autovalidateMode:
+                              //     AutovalidateMode.onUserInteraction,
                               onChanged: (value) {
                                 isMadeChanges = true;
                               },
@@ -282,7 +294,7 @@ class _DetailsState extends State<Details> {
                                 focusColor: kWhiteColor,
                                 focusedBorder:accountBorder(context),
                                 border: accountBorder(context),
-                                enabledBorder: accountBorder(context),
+                                enabledBorder: accountBorder(context)
                               ),
                             ),
                           ],
@@ -322,7 +334,7 @@ class _DetailsState extends State<Details> {
                                 detailsLoading = true;
                               });
 
-                              await updateProfileData(
+                              await updateProfileData( context,
                                       Preference.pref.getString("ID"),
                                       displayNameController.text.toString(),
                                       nameController.text.toString(),
@@ -338,21 +350,7 @@ class _DetailsState extends State<Details> {
 
 snackbr(context, error.toString(), kredColor);
                               });
-                              // .whenComplete(
-                              //   () {
-                              //     if (displayNameController.text.isEmpty &&
-                              //         currentPassController.text.isEmpty ||
-                              //         newPassController.text.isEmpty ||
-                              //         newCPassController.text.isEmpty) {
-                              //       snackbr(
-                              //           context,
-                              //           "Please enter details to edit",
-                              //           kredColor);
-                              //     } else {
-                              //       snackbr(context, "Profile Updated Successfully", kgreenclr);
-                              //     }
-                              //   },
-                              // );
+                            
                               setState(() {
                                 detailsLoading = false;
                               });

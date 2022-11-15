@@ -26,7 +26,7 @@ class _MyQuestState extends State<MyQuest> {
 
   @override
   void initState() {
-    fetchLQdata(Preference.pref.getString("ID") ?? "").then((value) {
+    fetchLQdata(context ,Preference.pref.getString("ID") ?? "").then((value) {
       lQdata = value;
       setState(() {
         isQuestLoading = false;

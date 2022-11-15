@@ -23,7 +23,7 @@ class WishListData {
   factory WishListData.fromJson(Map<String, dynamic> json) => WishListData(
         status: json["status"],
         msg: json["msg"],
-        data: List<FavData>.from(json["data"].map((x) => FavData.fromJson(x))),
+        data: List<FavData>.from(json["data"].map((x) => FavData.fromJson(x))).toList(),
       );
 
   Map<String, dynamic> toJson() => {

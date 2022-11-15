@@ -37,7 +37,7 @@ class _MainPageState extends State<MainPage> {
 
   @override
   void initState() {
-    fetchLQdata(Preference.pref.getString("ID") ?? "").then((value) {
+    fetchLQdata(context ,Preference.pref.getString("ID") ?? "").then((value) {
       lqdata = value;
       setState(() {
         isloading = false;

@@ -27,7 +27,7 @@ class _MyWishlistState extends State<MyWishlist> {
 
   @override
   void initState() {
-    myQuest(Preference.pref.getString("userId") ?? "").then((value) {
+    myQuest(context,Preference.pref.getString("userId") ?? "").then((value) {
       if (value != null) {
         myQuests = value;
         data.addAll(myQuests.data!.toList());

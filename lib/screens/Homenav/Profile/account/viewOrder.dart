@@ -1,3 +1,4 @@
+import 'package:letslokal/screens/Homenav/Profile/account/delete.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/utils/constant/screennavigation.dart';
 import 'package:letslokal/utils/dftbutton.dart';
@@ -251,7 +252,9 @@ class _ViewOrderState extends State<ViewOrder> {
             height: hm * 0.04,
             text: "Delete account",
             radius: 16,
-            press: () {},
+            press: () {
+              pushTo(context,const Delete());
+            },
             textClr: kWhiteColor.withOpacity(0.4),
             color: kBlackColor),
       ],

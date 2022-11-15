@@ -27,7 +27,7 @@ class _WishlistState extends State<Wishlist> {
 
   @override
   void initState() {
-    wishListData(Preference.pref.getString("userId")).then((value) {
+    wishListData(context ,Preference.pref.getString("userId")).then((value) {
       if (value != null) {
         favListData = value;
         data.addAll(favListData.data!.toList());

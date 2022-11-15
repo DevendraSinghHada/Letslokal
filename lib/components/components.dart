@@ -7,29 +7,29 @@ import '../utils/preference.dart';
 import '../utils/styleguide/colors..dart';
 import '../utils/styleguide/textstyle.dart';
 
-// CheckCircle used in delete account button in account.dart file
-Container checkCircle() {
+// // CheckCircle used in delete account button in account.dart file
+// Container checkCircle() {
   
-  return Container(
-    height: 18,
-    width: 18,
-    decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        color: kWhiteColor,
-        border:
-            // ignore: dead_code
-            Border.all(color: isSelect ? kblueColor : kBlackColor, width: 2)),
-    child: Center(
-      child: Padding(
-        padding: const EdgeInsets.all(2),
-        child: CircleAvatar(
-          // ignore: dead_code
-          backgroundColor: isSelect ? kblueColor : kbttnColor,
-        ),
-      ),
-    ),
-  );
-}
+//   return Container(
+//     height: 18,
+//     width: 18,
+//     decoration: BoxDecoration(
+//         shape: BoxShape.circle,
+//         color: kWhiteColor,
+//         border:
+//             // ignore: dead_code
+//             Border.all(color: isSelect ? kblueColor : kBlackColor, width: 2)),
+//     child: Center(
+//       child: Padding(
+//         padding: const EdgeInsets.all(2),
+//         child: CircleAvatar(
+//           // ignore: dead_code
+//           backgroundColor: isSelect ? kblueColor : kbttnColor,
+//         ),
+//       ),
+//     ),
+//   );
+// }
 
 // dot used in drawer main in expansion tile
 Container dotCircle(BuildContext context) {
@@ -64,8 +64,10 @@ Row expansionRow(BuildContext context, String text, Widget name) {
 }
 
 // InputDecoration for textformfield except password textformfield
-InputDecoration txtffDec() {
+InputDecoration txtffDec({Color ? fillColor,bool? filled  }) {
   return InputDecoration(
+    filled:filled ,
+    fillColor: fillColor,
     contentPadding: const EdgeInsets.all(10),
     focusColor: kWhiteColor,
     focusedBorder: OutlineInputBorder(

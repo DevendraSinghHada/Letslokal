@@ -87,6 +87,7 @@ Future fetchsignUpData(BuildContext context, String name, String username,
       print("API didn't called ");
     }
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
@@ -137,13 +138,14 @@ Future fetchLoginData(
       print('$apiLmsg');
     }
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
 
 //HomePage Section API
 
-Future fetchLQdata(String userId) async {
+Future fetchLQdata(BuildContext context, String userId) async {
   try {
     final response = await http
         .post(Uri.parse(baseUrl + uHomePageApi), body: {"userId": userId});
@@ -169,13 +171,14 @@ Future fetchLQdata(String userId) async {
       // print("$lqmsg");
     }
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
 
 // Update Profile page API
 
-Future updateProfileData(String userId, String name, String displayName,
+Future updateProfileData(BuildContext context, String userId, String name, String displayName,
     String oldPassword, String newPassword) async {
   try {
     final res = await http.post(Uri.parse(baseUrl + uUpdateProfApi), body: {
@@ -211,6 +214,8 @@ Future updateProfileData(String userId, String name, String displayName,
       }
     }
   } catch (e) {
+
+    // snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
@@ -248,11 +253,13 @@ Future addTofav(BuildContext context, String userId, int addToWishlist) async {
       print("Add to Wishlist Api called ");
     }
   } catch (e) {
-    print(e);
+
+    // snackbr(context, "Server Error", kredColor);
+    print(e.toString());
   }
 }
 
-Future wishListData(String userId) async {
+Future wishListData(BuildContext context, String userId) async {
   try {
     final response = await http
         .post(Uri.parse(baseUrl + uWishlistApi), body: {"userId": userId});
@@ -261,16 +268,26 @@ Future wishListData(String userId) async {
     wishMsg = data["msg"];
 
     if (response.statusCode == 200) {
+ 
       WishListData favListData = wishListDataFromJson(response.body.toString());
 
       if (wishMsg == "Success") {
         print("Here is your wihslist data $favListData");
 
         Preference.pref.setString("userId", userId);
+
+         return favListData;
       }
-      return favListData;
+      else {
+        return snackbr(context, wishMsg, kredColor);
+      }
+     
+  
+    
     }
+    
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
@@ -302,6 +319,7 @@ Future removeWishlist(
       // return data;
     }
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
@@ -326,11 +344,12 @@ Future ranking(String userId, BuildContext context) async {
       }
     }
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }
 
-Future myQuest(String userId) async {
+Future myQuest(BuildContext context, String userId) async {
   try {
     final respose = await http.post(Uri.parse(baseUrl + uMyQuestApi), body: {
       "userId": userId,
@@ -346,11 +365,14 @@ Future myQuest(String userId) async {
 
       if (myQuestsStatus == 200) {
         Preference.pref.setString("userId", userId);
+
+        return myQuests;
       }
 
-      return myQuests;
+      
     }
   } catch (e) {
+    //  snackbr(context, "Server Error", kredColor);
     print(e.toString());
   }
 }

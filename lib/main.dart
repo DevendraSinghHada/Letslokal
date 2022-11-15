@@ -11,8 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 // bool isFilled = false;
 
 
-// bool for selecting delete reason
-bool isSelect = true;
+
 
 // bool for order button used in account page
 bool isOrder = false;
