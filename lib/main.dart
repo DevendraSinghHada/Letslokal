@@ -19,7 +19,7 @@ bool isOrder = false;
 // variable for checking if user is a guest user or already logged in 
 var isNewUser = Preference.pref.getBool("isNewUser") ?? true;
 
-
+//commenting for push code  
 
 
 Future<void> main() async {
@@ -33,7 +33,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
