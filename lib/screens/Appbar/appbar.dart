@@ -12,11 +12,12 @@ import '../../utils/styleguide/textstyle.dart';
 import 'cart.dart';
 import 'drawer-option/drawermaiin.dart';
 
-AppBar myAppBar(BuildContext context, bool isBack) {
+AppBar myAppBar(BuildContext context, bool isBack,[Key? key]) {
   Size = MediaQuery.of(context).size;
   hm = Size.height;
   wm = Size.width;
   return AppBar(
+    key: key,
     automaticallyImplyLeading: isBack ? true : false,
     backgroundColor: kBlackColor,
     leadingWidth: hm * 0.046,
@@ -54,7 +55,7 @@ AppBar myAppBar(BuildContext context, bool isBack) {
                         },
                       )
                     : TextButton(
-                        child: Text(Preference.pref.getString("name") ?? "",
+                        child: Text(Preference.pref.getString("username") ?? "",
                             style: textW),
                         onPressed: () {
                           pushTo(context, const Profile());
@@ -86,7 +87,7 @@ AppBar myAppBar(BuildContext context, bool isBack) {
         child: Center(
           child: InkWell(
             onTap: () {
-              pushTo(context, const Cart());
+               pushTo(context, const Cart());
             },
             child: const Icon(
               Icons.shopping_bag_outlined,

@@ -20,6 +20,8 @@ class _WishlistState extends State<Wishlist> {
   // List<MyWish> myLikedlist = [];
 
   bool isloading = true;
+
+  bool isWishlistLoader = false;
   // bool hasData = true;
 
   WishListData favListData = WishListData();
@@ -48,150 +50,161 @@ class _WishlistState extends State<Wishlist> {
     return Scaffold(
       appBar: myAppBar(context, false),
       backgroundColor: kBlackColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(
-              left: hm * 0.03, top: hm * 0.03, right: wm * 0.03),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Wishlist',
-                  style:
-                      textW.copyWith(fontSize: 34, fontFamily: "BalooBhai2")),
-              Padding(
-                  padding: EdgeInsets.only(
-                    top: hm * 0.05,
-                  ),
-                  child: isloading
-                      ? circleloader
-                      : data.isEmpty
-                          ? Center(
-                              child: Text(
-                                "No product added to wishlist",
-                                style: textAcc,
-                              ),
-                            )
-                          :
-                          // : hasData
-                          // ?
-                          ListView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: data.length,
-                              itemBuilder: ((context, index) {
-                                return Column(
-                                  children: [
-                                    Row(
-                                      children: [
-                                        Container(
-                                          height: wm * 0.15,
-                                          width: wm * 0.15,
-                                          decoration: BoxDecoration(
-                                              image: DecorationImage(
-                                            fit: BoxFit.cover,
-                                            image: NetworkImage(
+      body: Stack(
+        children:[ SingleChildScrollView(
+          child: Padding(
+            padding: EdgeInsets.only(
+                left: hm * 0.03, top: hm * 0.03, right: wm * 0.03),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Wishlist',
+                    style:
+                        textW.copyWith(fontSize: 34, fontFamily: "BalooBhai2")),
+                Padding(
+                    padding: EdgeInsets.only(
+                      top: hm * 0.05,
+                    ),
+                    child: isloading
+                        ? circleloader
+                        : data.isEmpty
+                            ? Center(
+                                child: Text(
+                                  "No product added to wishlist",
+                                  style: textAcc,
+                                ),
+                              )
+                            :
+                            // : hasData
+                            // ?
+                            ListView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: data.length,
+                                itemBuilder: ((context, index) {
+                                  return Column(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          Container(
+                                            height: wm * 0.15,
+                                            width: wm * 0.15,
+                                            decoration: BoxDecoration(
+                                                image: DecorationImage(
+                                              fit: BoxFit.cover,
+                                              image: NetworkImage(
+                                                data
+                                                    .elementAt(index)
+                                                    .productImage
+                                                    .toString(),
+                                              ),
+                                            )),
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.only(
+                                              bottom: hm * 0.025,
+                                              left: wm * 0.03,
+                                            ),
+                                            child: Text(
                                               data
                                                   .elementAt(index)
-                                                  .productImage
+                                                  .productName
                                                   .toString(),
+                                              style: dropdown.copyWith(
+                                                fontSize: 22,
+                                              ),
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
                                             ),
-                                          )),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.only(
-                                            bottom: hm * 0.025,
-                                            left: wm * 0.03,
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.end,
+                                        children: [
+                                          TextButton(
+                                              onPressed: () {},
+                                              child: Text(
+                                                "Add to cart",
+                                                style: textAcc.copyWith(
+                                                    color: kcolortrivango),
+                                              )),
+                                          SizedBox(
+                                            width: wm * 0.3,
                                           ),
-                                          child: Text(
-                                            data
-                                                .elementAt(index)
-                                                .productName
-                                                .toString(),
-                                            style: dropdown.copyWith(
-                                              fontSize: 22,
-                                            ),
-                                            maxLines: 2,
-                                            overflow: TextOverflow.ellipsis,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Row(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        TextButton(
-                                            onPressed: () {},
-                                            child: Text(
-                                              "Add to cart",
-                                              style: textAcc.copyWith(
-                                                  color: kcolortrivango),
-                                            )),
-                                        SizedBox(
-                                          width: wm * 0.3,
-                                        ),
-                                        IconButton(
-                                            onPressed: () async {
-                                              Preference.pref.setString(
-                                                  "wishlistId",
-                                                  data
-                                                      .elementAt(index)
-                                                      .wishlistId);
+                                          IconButton(
+                                              onPressed: () async {
+                                                Preference.pref.setString(
+                                                    "wishlistId",
+                                                    data
+                                                        .elementAt(index)
+                                                        .wishlistId);
 
-                                              await removeWishlist(
-                                                      context,
-                                                      Preference.pref
-                                                          .getString("userId"),
-                                                      Preference.pref.getString(
-                                                          "wishlistId"))
-                                                  .then((value) {
-                                                if (value = true) {
-                                                  data.removeAt(index);
-                                                  setState(() {});
-                                                }
-                                              }).then((value) => snackbr(
-                                                      context,
-                                                      removeListMsg,
-                                                      kdarkGreyclr));
-                                              // .then((value) => snackbr(
-                                              //     context,
-                                              //     removeListMsg.toString(),
-                                              //     kredColor));
-                                            },
-                                            icon: const Icon(
-                                              Icons.delete,
-                                              color: kcolortrivango,
-                                            ))
-                                      ],
-                                    ),
-                                  ],
-                                );
-                              }))),
-              SizedBox(
-                height: hm * 0.095,
-              ),
-              Center(
-                child: SizedBox(
-                  height: hm * 0.06,
-                  width: wm * 0.35,
-                  child: OutlinedButton(
-                    style: OutlinedButton.styleFrom(
-                      // backgroundColor: kWhiteColor,
-                      side: const BorderSide(color: kWhiteColor, width: 1),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
+                                                        setState(() {
+                                                          isWishlistLoader = true;
+                                                        });
+      
+                                                await removeWishlist(
+                                                        context,
+                                                        Preference.pref
+                                                            .getString("userId"),
+                                                        Preference.pref.getString(
+                                                            "wishlistId"))
+                                                    .then((value) {
+                                                  if (value = true) {
+                                                    data.removeAt(index);
+                                                    setState(() {});
+                                                  }
+                                                }).then((value) => snackbr(
+                                                        context,
+                                                        removeListMsg,
+                                                        kdarkGreyclr));
+                                                // .then((value) => snackbr(
+                                                //     context,
+                                                //     removeListMsg.toString(),
+                                                //     kredColor));
+
+                                                 setState(() {
+                                                          isWishlistLoader = false;
+                                                        });
+                                              },
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: kcolortrivango,
+                                              ))
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }))),
+                SizedBox(
+                  height: hm * 0.095,
+                ),
+                Center(
+                  child: SizedBox(
+                    height: hm * 0.06,
+                    width: wm * 0.35,
+                    child: OutlinedButton(
+                      style: OutlinedButton.styleFrom(
+                        // backgroundColor: kWhiteColor,
+                        side: const BorderSide(color: kWhiteColor, width: 1),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
                       ),
+                      child: Text("More Quests", style: textW),
+                      onPressed: () {
+                        pushTo(context, HomeNav(selectindex: 4));
+                      },
                     ),
-                    child: Text("More Quests", style: textW),
-                    onPressed: () {
-                      pushTo(context, HomeNav(selectindex: 4));
-                    },
                   ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
-      ),
+        isWishlistLoader == true ? customLoader : Container()
+     ] ),
     );
   }
 }

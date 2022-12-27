@@ -99,7 +99,7 @@ class _ProfileState extends State<Profile> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Icon(
+                  Preference.pref.getString("fbUrl").isEmpty ? Container() :  Icon(
                         Icons.facebook_outlined,
                         color:
                             //  isFilled == true ?
@@ -108,21 +108,21 @@ class _ProfileState extends State<Profile> {
                         //  kWhiteColor,
                         size: hm * 0.04,
                       ),
-                      const Icon(
+                     Preference.pref.getString("twitterUrl").isEmpty ?  Container() : const Icon(
                         Brandico.twitter_bird,
                         color: kWhiteColor,
                         size: 20,
-                      ),
-                      const Icon(
+                      ) ,
+                  Preference.pref.getString("instaUrl").isEmpty ?   Container() :  const Icon(
                         Brandico.instagram_1,
                         color: kWhiteColor,
                         size: 20,
-                      ),
-                      Icon(
+                      ) ,
+                    Preference.pref.getString("tiktokUrl").isEmpty ? Container() :  Icon(
                         Icons.tiktok,
                         color: kWhiteColor,
                         size: hm * 0.04,
-                      ),
+                      ) 
                     ],
                   )
                 ],

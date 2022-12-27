@@ -2,6 +2,8 @@ import 'package:letslokal/Services/auth.dart';
 import 'package:letslokal/components/components.dart';
 import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/Appbar/drawer-option/about.dart';
+import 'package:letslokal/screens/Appbar/drawer-option/privacyWeb.dart';
+import 'package:letslokal/screens/Appbar/drawer-option/terms.dart';
 import 'package:letslokal/screens/Homenav/HomePage/ranking.dart';
 import 'package:letslokal/screens/Homenav/Profile/profile.dart';
 import 'package:letslokal/utils/constant/images.dart';
@@ -16,6 +18,7 @@ import 'package:letslokal/screens/Homenav/HomePage/how_to_joine.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttericon/brandico_icons.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import 'contactus.dart';
 
@@ -31,15 +34,53 @@ class _DrawermainState extends State<Drawermain> {
   Color _textAColor = kWhiteColor;
   Color _textIColor = kWhiteColor;
 
+  final fbUrl = Uri.parse("https://www.facebook.com/letslokal.page/");
+  final instaUrl = Uri.parse("https://www.instagram.com/letslokal/");
+  final twitterUrl = Uri.parse("https://twitter.com/letslokal/");
+  final tripAdvUrl = Uri.parse("https://www.tripadvisor.com/Profile/letslokal?fid=4adb83a8-0bb8-4e57-9dd5-74d746466413");
+  final tiktokUrl = Uri.parse("https://www.tiktok.com/@letslokal");
+
   String displayvalu = "Other Curntrys";
-  var currency = [
-    'India',
-    'USA',
-    'Aruba',
+  var countryList = [
+    'Aland Islands',
+    'Andorra',
     'Austria',
-    'Canada',
-    'Japan',
+    'Australia'
+    'Belgium',
+    'Cyprus'
+    'Estonia',
+    'Finland',
+    'France',
+    'French Guiana',
+    'French Southern Territories',
+    'Germany',
+    'Greece',
+    'Guadeloupe',
+    'Ireland',
+    'Italy',
+    'Latvia',
+    'Lithuania',
+    'Luxembourg',
+    'Malaysia',
+    'Malta',
+    'Martinique',
+    'Mayotte',
+    'Monaco',
+    'Montenegro',
+    'Nehterlands',
+    'Portugal',
+    'Reunion',
+    'Saint Barthelemy',
+    'Saint Martin (French part)',
+    'Saint Pierre and Miquelon',
+    'San Marino',
+    'Singapore',
+    'Slovakia',
+    'Slovenia',
+    'Spain',
     'United Kingdom',
+    'Vatican',
+    
   ];
 
   @override
@@ -231,9 +272,28 @@ class _DrawermainState extends State<Drawermain> {
                       size: 20,
                     ),
                     Text(
-                      ' All Rights Reserved | Privacy. | Terms',
+                      ' All Rights Reserved |',
                       style: subtital.copyWith(fontSize: 16),
-                    )
+                    ),
+                    TextButton(onPressed: (){
+
+                      pushTo(context,const PrivacyWeb());
+
+                    }, child: Text(
+                      'Privacy',
+                      style: subtital.copyWith(fontSize: 16).copyWith(decoration: TextDecoration.underline),
+                    ),),
+                    Text(
+                      '|',
+                      style: subtital.copyWith(fontSize: 16),
+                    ),
+                    TextButton(onPressed: (){
+                      pushTo(context,const TermsWeb());
+
+                    }, child: Text(
+                      'Terms',
+                      style: subtital.copyWith(fontSize: 16).copyWith(decoration: TextDecoration.underline),
+                    ),)
                   ],
                 ),
               ),
@@ -263,7 +323,7 @@ class _DrawermainState extends State<Drawermain> {
                           fontSize: hm * 0.022,
                           fontWeight: FontWeight.w600),
                     ),
-                    items: currency.map((String items) {
+                    items: countryList.map((String items) {
                       return DropdownMenuItem(
                         value: items,
                         child: Text(items),
@@ -279,33 +339,50 @@ class _DrawermainState extends State<Drawermain> {
               SizedBox(
                 width: wm * 0.6,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Icon(
-                      Icons.facebook_outlined,
-                      color: kWhiteColor,
-                      size: 30,
-                    ),
-                    const Icon(
+           children: [
+            
+
+                    IconButton(onPressed: (){
+                          launchUrl(fbUrl,mode: LaunchMode.externalApplication);
+                    }, icon: const Icon(
+                        Icons.facebook_outlined,
+                        color: kWhiteColor,
+                        size: 30,
+                      ),),
+                       IconButton(onPressed: (){
+                        print(countryList.length.toString());
+                          launchUrl(tiktokUrl,mode: LaunchMode.externalApplication);
+                    }, icon:const Icon(
                       Icons.tiktok,
                       color: kWhiteColor,
                       size: 30,
-                    ),
-                    SvgPicture.asset(
+                    ),),
+
+                       IconButton(onPressed: (){
+                          launchUrl(tripAdvUrl,mode: LaunchMode.externalApplication);
+                    }, icon: SvgPicture.asset(
                       tripAdvisor,
                       color: kWhiteColor,
                       height: 33,
-                    ),
-                    const Icon(
+                    )  ),
+
+                      IconButton(onPressed: (){
+                          launchUrl(twitterUrl,mode: LaunchMode.externalApplication);
+                    }, icon:const Icon(
                       Brandico.twitter_bird,
                       color: kWhiteColor,
                       size: 23,
-                    ),
-                    const Icon(
+                    )  ),
+
+                    
+                      IconButton(onPressed: (){
+                          launchUrl(instaUrl,mode: LaunchMode.externalApplication);
+                    }, icon:const Icon(
                       Brandico.instagram_1,
                       color: kWhiteColor,
                       size: 23,
-                    ),
+                    ) ),
+                
                   ],
                 ),
               )

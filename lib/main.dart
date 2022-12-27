@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:letslokal/Provider/app_state.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/screens/OnBoarding/login-screen.dart';
+import 'package:letslokal/utils/navigation.dart';
 import 'package:letslokal/utils/preference.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -40,6 +41,7 @@ class MyApp extends StatelessWidget {
           ChangeNotifierProvider(create: (_) => AppState()),
         ],
         child: MaterialApp(
+          navigatorKey: NavigationService.navigatorKey,
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             primarySwatch: Colors.teal,

@@ -1,4 +1,5 @@
 import 'package:letslokal/screens/Appbar/appbar.dart';
+import 'package:letslokal/screens/Homenav/Profile/profile.dart';
 import 'package:letslokal/screens/Homenav/homenav.dart';
 import 'package:letslokal/utils/constant/screennavigation.dart';
 import 'package:letslokal/utils/preference.dart';
@@ -10,6 +11,13 @@ import 'package:flutter/material.dart';
 import '../../../../main.dart';
 import '../../../../utils/styleguide/textstyle.dart';
 
+
+
+bool instaFilled = false;
+bool fbFilled = false;
+bool twitterFilled = false;
+bool tiktokFilled = false;
+
 class EditProfile extends StatefulWidget {
   const EditProfile({Key? key}) : super(key: key);
 
@@ -18,10 +26,12 @@ class EditProfile extends StatefulWidget {
 }
 
 class _EditProfileState extends State<EditProfile> {
-  TextEditingController instaController = TextEditingController();
-  TextEditingController twitterController = TextEditingController();
-  TextEditingController fbController = TextEditingController();
-  TextEditingController tiktokController = TextEditingController();
+  TextEditingController instaController = TextEditingController(text: Preference.pref.getString("instaUrl") );
+  TextEditingController twitterController = TextEditingController(text: Preference.pref.getString("twitterUrl"));
+  TextEditingController fbController = TextEditingController(text: Preference.pref.getString("fbUrl"));
+  TextEditingController tiktokController = TextEditingController(text: Preference.pref.getString("tiktokUrl"));
+
+
 
   final _formkey = GlobalKey<FormState>();
   @override
@@ -290,8 +300,23 @@ class _EditProfileState extends State<EditProfile> {
                         ),
                         onPressed: () {
                           if (_formkey.currentState!.validate()) {
-                            // snackbr(context, "success", kgreenclr);
 
+                            Preference.pref.setString("instaUrl", instaController.text);
+                            Preference.pref.setString("fbUrl", fbController.text);
+                            Preference.pref.setString("twitterUrl", twitterController.text);
+                            Preference.pref.setString("tiktokUrl", tiktokController.text);
+
+                            setState(() {
+                              
+                            });
+
+
+                            replaceRoute(context, const Profile());
+                            
+
+                            
+
+                            // snackbr(context, "success", kgreenclr);
                             // setState(() {
                             //   isFilled = true;
                             // });

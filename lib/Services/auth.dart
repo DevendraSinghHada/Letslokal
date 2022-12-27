@@ -161,12 +161,14 @@ Future fetchLQdata(BuildContext context, String userId) async {
           userId,
         );
 
+             return lqdata;
+
         // Preference.pref.getString("userId");
         // Preference.pref.getInt("productId");
         print("Your HomePage API is Running");
       }
 
-      return lqdata;
+ 
 
       // print("$lqmsg");
     }

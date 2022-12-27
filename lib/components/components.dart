@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:letslokal/main.dart';
 import 'package:letslokal/screens/OnBoarding/login-screen.dart';
 import 'package:letslokal/utils/dftbutton.dart';
+import 'package:letslokal/utils/navigation.dart';
 import '../utils/constant/screennavigation.dart';
 import '../utils/preference.dart';
 import '../utils/styleguide/colors..dart';
@@ -40,6 +41,20 @@ Container dotCircle(BuildContext context) {
         color: kWhiteColor.withOpacity(0.50), shape: BoxShape.circle),
   );
 }
+
+// loader 
+
+Container customLoader = Container(
+    color: kBlackColor.withOpacity(0.75),
+    height: MediaQuery.of(NavigationService.navigatorKey.currentContext!)
+            .size
+            .height *
+        1,
+    width: MediaQuery.of(NavigationService.navigatorKey.currentContext!)
+            .size
+            .width *
+        1,
+    child: const Center(child: CircularProgressIndicator.adaptive()));
 
 // Reusable expansion row in drawer main
 Row expansionRow(BuildContext context, String text, Widget name) {

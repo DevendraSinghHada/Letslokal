@@ -53,7 +53,7 @@ class _MyQuestState extends State<MyQuest> {
               Padding(
                 padding: EdgeInsets.only(top: hm * 0.01, bottom: hm * 0.055),
                 child: Text(
-                  'Explore cities with scavenger hounts',
+                  'Explore cities with scavenger hunts',
                   style: textAcc.copyWith(color: kwhitedarkclr, fontSize: 20),
                 ),
               ),
@@ -90,11 +90,11 @@ class _MyQuestState extends State<MyQuest> {
                             // width: wm * 0.44,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10),
-                                color: ktextfildecolor),
+                                color: kBlackColor),
                             child: Padding(
                               padding: EdgeInsets.all(wm * 0.02),
                               child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
                                     height: hm * 0.27,
@@ -110,12 +110,15 @@ class _MyQuestState extends State<MyQuest> {
                                             fit: BoxFit.cover)),
                                   ),
                                   SizedBox(
-                                    height: hm * 0.01,
+                                    height: hm * 0.03,
                                   ),
-                                  Text(
-                                    lQdata.data!.elementAt(index).productName!,
-                                    style: ffText,
-                                    textAlign: TextAlign.center,
+                                  Padding(
+                                    padding:  EdgeInsets.only(left: wm * 0.02),
+                                    child: Text(
+                                      lQdata.data!.elementAt(index).category!,
+                                      style: ffText.copyWith(fontSize: 17),
+                                      textAlign: TextAlign.start,
+                                    ),
                                   ),
                                 ],
                               ),
