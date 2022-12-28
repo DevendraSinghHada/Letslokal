@@ -22,7 +22,7 @@ class _CartState extends State<Cart> {
     wm = Size.width;
     return Scaffold(
       backgroundColor: kBlackColor,
-      appBar: myAppBar(context, true),
+      appBar: myAppBar(context, true ,GlobalKey(),true,false ),
       body: Column(
         children: [
           Center(

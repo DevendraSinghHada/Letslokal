@@ -122,33 +122,27 @@ fetchLQdata(context ,Preference.pref.getString("ID") ?? "").then((value) {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                SizedBox(
-                                  width: wm*0.35,
-                                  child: FittedBox(
-                                    child: Text(
-                                      'Be an',
-                                      style: TextStyle(
-                                          color: kWhiteColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: hm * 0.080,
-                                          fontFamily: "BalooBhai2",
-                                          height: 1.5),
-                                    ),
+                                FittedBox(
+                                  child: Text(
+                                    'Be an',
+                                    style: TextStyle(
+                                        color: kWhiteColor,
+                                        fontWeight: FontWeight.w700,
+                                        fontSize: hm * 0.080,
+                                        fontFamily: "BalooBhai2",
+                                        height: 1.5),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: wm*0.75,
-                                  child: FittedBox(
-                                    child: GradientText(
-                                      'adventurer',
-                                      style: TextStyle(
-                                          fontSize: hm * 0.080,
-                                          fontWeight: FontWeight.bold,
-                                          fontFamily: "balooBhai2",
-                                          height: 01.05),
-                                      gradientType: GradientType.radial,
-                                      colors: const [korangeClr, kyColor, kredColor],
-                                    ),
+                                FittedBox(
+                                  child: GradientText(
+                                    'adventurer',
+                                    style: TextStyle(
+                                        fontSize: hm * 0.080,
+                                        fontWeight: FontWeight.w700,
+                                        fontFamily: "balooBhai2",
+                                        height: 01.05),
+                                    gradientType: GradientType.radial,
+                                    colors: const [korangeClr, kyColor, kredColor],
                                   ),
                                 ),
                                 Text('Explore cities with scavenger hunts',

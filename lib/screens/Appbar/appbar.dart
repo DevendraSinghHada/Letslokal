@@ -12,7 +12,7 @@ import '../../utils/styleguide/textstyle.dart';
 import 'cart.dart';
 import 'drawer-option/drawermaiin.dart';
 
-AppBar myAppBar(BuildContext context, bool isBack,[Key? key]) {
+AppBar myAppBar(BuildContext context, bool isBack,[Key? key, bool isInProfile=true , bool isINCart = true]) {
   Size = MediaQuery.of(context).size;
   hm = Size.height;
   wm = Size.width;
@@ -58,7 +58,9 @@ AppBar myAppBar(BuildContext context, bool isBack,[Key? key]) {
                         child: Text(Preference.pref.getString("username") ?? "",
                             style: textW),
                         onPressed: () {
-                          pushTo(context, const Profile());
+                          if (isInProfile) {
+  pushTo(context, const Profile());
+}
                         },
                       ))),
       ),
@@ -87,7 +89,9 @@ AppBar myAppBar(BuildContext context, bool isBack,[Key? key]) {
         child: Center(
           child: InkWell(
             onTap: () {
-               pushTo(context, const Cart());
+               if (isINCart) {
+  pushTo(context, const Cart());
+}
             },
             child: const Icon(
               Icons.shopping_bag_outlined,
